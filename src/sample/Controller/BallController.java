@@ -4,66 +4,70 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
 import sample.GameObject.ball.Ball;
 import sample.GamePane;
 
-public class BallController implements Runnable
+public class BallController extends AbstractController
 {
     private Ball ball;
-    private Pane pane;
-    private Timeline animation;
-    Circle circle;
 
-    private double x;
-    private double y;
     private double dx;
     private double dy;
 
     public BallController(Ball ball, GamePane pane)
     {
+        super(pane, null);
+        super.setAnimation(new Timeline(new KeyFrame(Duration.millis(10), e -> move())));
         this.ball = ball;
-        this.pane = pane;
-        this.animation = new Timeline(new KeyFrame(Duration.millis(10), e -> move()));
-//        animation.setCycleCount(100);
-        animation.setCycleCount(Animation.INDEFINITE);
 
-        x = 30;
-        y = 30;
+        this.getAnimation().setCycleCount(Animation.INDEFINITE);
+
         dx = 1;
         dy = 1;
-        circle = new Circle(x, y, ball.getRidus(), ball.getColor());
-
     }
 
-    public Circle getShape()
+
+    public Ball getShape()
     {
-        return circle;
+        return ball;
+    }
+
+    private boolean isBound()
+    {
+        double x = ball.getCenterX();
+        double y = ball.getCenterY();
+        double radius = ball.getRadius();
+        Pane pane = this.getPane();
+
+
+        boolean flag = false;
+        // Check boundaries
+        if (x < radius || x > pane.getWidth() - radius)
+        {
+            dx *= -1; // Change ball move direction
+            flag = true;
+        } else if (y < radius || y > pane.getHeight() - radius)
+        {
+            dy *= -1; // Change ball move direction
+            flag = true;
+        }
+
+        return flag;
     }
 
     public void move()
     {
-        // Check boundaries
-        if (x < ball.getRidus() || x > pane.getWidth() - ball.getRidus())
-        {
-            dx *= -1; // Change ball move direction
-        } else if (y < ball.getRidus() || y > pane.getHeight() - ball.getRidus())
-        {
-            dy *= -1; // Change ball move direction
-        }
-
-        // Adjust ball position
-        x += dx;
-        y += dy;
-        circle.setCenterX(x);
-        circle.setCenterY(y);
+        isBound();
+        ball.setCenterX(ball.getCenterX() + dx);
+        ball.setCenterY(ball.getCenterY() + dy);
     }
 
     @Override
     public void run()
     {
-        animation.play();
+        this.getAnimation().play();
     }
 }

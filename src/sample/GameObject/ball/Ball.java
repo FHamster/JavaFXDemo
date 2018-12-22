@@ -1,30 +1,13 @@
 package sample.GameObject.ball;
 
-import javafx.scene.paint.Color;
 
-public class Ball
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
+
+public class Ball extends Circle
 {
-    private int ridus;
-    private Color color;
-
-    public Ball()
+    public Ball(double centerX, double centerY, double radius, Paint fill)
     {
-        this(15, Color.GOLD);
-    }
-
-    public Ball(int ridus, Color color)
-    {
-        this.ridus = ridus;
-        this.color = color;
-    }
-
-    public Color getColor()
-    {
-        return color;
-    }
-
-    public int getRidus()
-    {
-        return ridus;
+        super(centerX, centerY, radius, fill);
     }
 }

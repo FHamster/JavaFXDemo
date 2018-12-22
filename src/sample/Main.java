@@ -14,7 +14,6 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         GamePane ballPan = new GamePane();
         primaryStage.setScene(new Scene(ballPan, 300, 275));
-
         primaryStage.show();
     }
 

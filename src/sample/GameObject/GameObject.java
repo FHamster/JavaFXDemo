@@ -1,6 +1,9 @@
 package sample.GameObject;
 
-interface GameObject
+import javafx.geometry.Point2D;
+import javafx.scene.shape.Circle;
+
+public interface GameObject
 {
 
 }
