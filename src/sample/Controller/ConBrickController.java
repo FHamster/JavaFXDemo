@@ -20,14 +20,14 @@ public class ConBrickController extends BrickController
 
     public void moveLeft()
     {
-        System.out.println("A");
+//        System.out.println("A");
         Brick brick = super.getShape();
         brick.setX(brick.getX() - 10);
     }
 
     public void moveRight()
     {
-        System.out.println("D");
+//        System.out.println("D");
         Brick brick = super.getShape();
         brick.setX(brick.getX() + 10);
     }

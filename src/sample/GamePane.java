@@ -9,10 +9,10 @@ import sample.GameObject.Brick;
 
 public class GamePane extends Pane
 {
+    ConBrickController conBrickController;
+
     public GamePane()
     {
-        Point2D point2D = new Point2D(30, 30);
-
         Ball ball = new Ball(30, 30, 10, Color.FIREBRICK);
         Ball ball2 = new Ball(30, 70, 20, Color.CORNFLOWERBLUE);
         BallController ballController = new BallController(ball, this);
@@ -21,20 +21,8 @@ public class GamePane extends Pane
         Brick brick = new Brick(50, 50, 10, 50, Color.CORAL);
         BrickController brickController = new BrickController(Brick.getRandStdBrick(), this, 1);
 
-        Brick brick2 = new Brick(50, 50, 10, 50, Color.CORAL);
-        ConBrickController conBrickController = new ConBrickController(brick2, this, 1);
-        conBrickController.getShape().setOnKeyPressed(e ->
-        {
-            switch (e.getCode())
-            {
-                case LEFT:
-                    conBrickController.moveLeft();
-                    break;
-                case RIGHT:
-                    conBrickController.moveRight();
-                    break;
-            }
-        });
+        Brick brick2 = new Brick(50, 50, 50, 50, Color.CORAL);
+        conBrickController = new ConBrickController(brick2, this, 1);
 
         conBrickController.getShape().requestFocus();
 
@@ -42,6 +30,16 @@ public class GamePane extends Pane
         getChildren().add(ballController2.getShape());
         getChildren().add(brickController.getShape());
         getChildren().add(conBrickController.getShape());
+
+        setOnKeyPressed(e->{
+            switch (e.getCode())
+            {
+                case A:conBrickController.moveLeft();
+                    break;
+                case D:conBrickController.moveRight();
+                    break;
+            }
+        });
 
         Thread t = new Thread(ballController);
         Thread t2 = new Thread(ballController2);
@@ -51,6 +49,12 @@ public class GamePane extends Pane
         t2.start();
         t3.start();
         t4.start();
+
+
     }
 
+    public ConBrickController getConBrickController()
+    {
+        return conBrickController;
+    }
 }
