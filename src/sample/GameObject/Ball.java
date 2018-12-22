@@ -1,4 +1,4 @@
-package sample.GameObject.ball;
+package sample.GameObject;
 
 
 import javafx.scene.paint.Paint;

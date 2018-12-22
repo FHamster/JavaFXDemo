@@ -4,10 +4,9 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
-import sample.GameObject.ball.Ball;
+import sample.GameObject.Ball;
 import sample.GamePane;
 
 public class BallController extends AbstractController

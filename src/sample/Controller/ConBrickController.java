@@ -1,7 +1,6 @@
 package sample.Controller;
 
-import javafx.scene.shape.Shape;
-import sample.GameObject.brick.Brick;
+import sample.GameObject.Brick;
 import sample.GamePane;
 
 public class ConBrickController extends BrickController

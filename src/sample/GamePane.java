@@ -4,8 +4,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import sample.Controller.*;
-import sample.GameObject.ball.Ball;
-import sample.GameObject.brick.Brick;
+import sample.GameObject.Ball;
+import sample.GameObject.Brick;
 
 public class GamePane extends Pane
 {

@@ -2,11 +2,9 @@ package sample.Controller;
 
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
-import javafx.animation.Transition;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Shape;
 import javafx.util.Duration;
-import sample.GameObject.brick.Brick;
+import sample.GameObject.Brick;
 
 public class BrickController extends AbstractController
 {
