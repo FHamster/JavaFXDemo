@@ -1,6 +1,8 @@
 package sample.Controller;
 
 import javafx.animation.Animation;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 

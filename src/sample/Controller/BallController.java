@@ -6,7 +6,7 @@ import javafx.animation.Timeline;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-import sample.GameObject.Ball;
+import sample.GameObjectView.Ball;
 import sample.GamePane;
 
 public class BallController extends AbstractController
@@ -22,7 +22,7 @@ public class BallController extends AbstractController
         super.setAnimation(new Timeline(new KeyFrame(Duration.millis(10), e -> move())));
         this.ball = ball;
 
-        this.getAnimation().setCycleCount(Animation.INDEFINITE);
+        getAnimation().setCycleCount(Animation.INDEFINITE);
 
         dx = 1;
         dy = 1;
@@ -60,6 +60,7 @@ public class BallController extends AbstractController
     public void move()
     {
         isBound();
+
         ball.setCenterX(ball.getCenterX() + dx);
         ball.setCenterY(ball.getCenterY() + dy);
     }
@@ -67,6 +68,6 @@ public class BallController extends AbstractController
     @Override
     public void run()
     {
-        this.getAnimation().play();
+        getAnimation().play();
     }
 }

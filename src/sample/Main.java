@@ -15,13 +15,13 @@ public class Main extends Application
     public void start(Stage primaryStage) throws Exception
     {
 //        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        GamePane gamePane = new GamePane();
-//        gamePane.setOnKeyPressed(e -> System.out.println(3));
-        primaryStage.setScene(new Scene(gamePane, 300, 275));
+        primaryStage.setTitle("Brick Breaker");
+        RootPane rootPane = new RootPane();
+
+        primaryStage.setScene(new Scene(rootPane, 600, 800));
         primaryStage.show();
 
-        gamePane.requestFocus();
+        rootPane.getGamePane().requestFocus();
 
     }
 

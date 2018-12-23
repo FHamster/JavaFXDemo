@@ -1,4 +1,4 @@
-package sample.GameObject;
+package sample.GameObjectView;
 
 
 import javafx.scene.paint.Paint;
@@ -9,5 +9,6 @@ public class Ball extends Circle
     public Ball(double centerX, double centerY, double radius, Paint fill)
     {
         super(centerX, centerY, radius, fill);
+//        super.cente
     }
 }

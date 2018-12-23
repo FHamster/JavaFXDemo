@@ -1,8 +1,8 @@
 package sample.myUtil;
 
 
-import sample.GameObject.Ball;
-import sample.GameObject.Brick;
+import sample.GameObjectView.Ball;
+import sample.GameObjectView.Brick;
 
 public interface MyUtil
 {

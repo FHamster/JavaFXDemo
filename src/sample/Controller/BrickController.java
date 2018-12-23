@@ -2,24 +2,23 @@ package sample.Controller;
 
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
-import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import sample.GameObject.Brick;
+import sample.GameObjectView.Brick;
+import sample.GamePane;
 
 public class BrickController extends AbstractController
 {
     private int HP;
     private Brick brick;
 
-
-    public BrickController(Brick brick, Pane pane, int HP)
+    public BrickController(Brick brick, GamePane pane, int HP)
     {
         super(pane, null);
-        FadeTransition FT = new FadeTransition(new Duration(1000), brick);
+        FadeTransition FT = new FadeTransition(Duration.millis(1000), brick);
         FT.setFromValue(1.0);
         FT.setToValue(0.0);
         FT.setCycleCount(Animation.INDEFINITE);
-        this.setAnimation(FT);
+        setAnimation(FT);
 
 //        super.setAnimation();
         ;
@@ -31,7 +30,7 @@ public class BrickController extends AbstractController
     @Override
     public void run()
     {
-        this.getAnimation().play();
+        getAnimation().play();
     }
 
     @Override

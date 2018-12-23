@@ -1,39 +1,41 @@
 package sample.Controller;
 
-import sample.GameObject.Brick;
-import sample.GamePane;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
+import sample.GameObjectView.Brick;
 
-public class ConBrickController extends BrickController
+public class ConBrickController extends AbstractController
 {
+    Brick brick;
 
-    public ConBrickController(Brick brick, GamePane pane,int hp)
+    public ConBrickController(Brick brick, Pane pane)
     {
-        super(brick, pane, hp);
-//        super.setAnimation(new Timeline(new KeyFrame(Duration.millis(10), e -> con())));
-//        this.brick = brick;
+        super(pane, null);
+        super.setAnimation(new Timeline(new KeyFrame(Duration.millis(10))));
+
+        this.brick = brick;
     }
 
     public Brick getShape()
     {
-        return super.getShape();
+        return brick;
     }
 
     public void moveLeft()
     {
-//        System.out.println("A");
-        Brick brick = super.getShape();
-        brick.setX(brick.getX() - 10);
+        brick.setX(brick.getX() - 5);
     }
 
     public void moveRight()
     {
-//        System.out.println("D");
-        Brick brick = super.getShape();
-        brick.setX(brick.getX() + 10);
+        brick.setX(brick.getX() + 5);
     }
+
     @Override
     public void run()
     {
-
+//        getAnimation().play();
     }
 }

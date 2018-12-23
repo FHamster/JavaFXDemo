@@ -1,11 +1,15 @@
 package sample;
 
-import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import sample.Controller.*;
-import sample.GameObject.Ball;
-import sample.GameObject.Brick;
+import sample.GameObjectView.Ball;
+import sample.GameObjectView.Brick;
+
 
 public class GamePane extends Pane
 {
@@ -13,18 +17,25 @@ public class GamePane extends Pane
 
     public GamePane()
     {
+        setMinSize(600, 800);
+        setMaxSize(600, 800);
+
+        Image image = new Image(getClass().getResourceAsStream("../img/background.png"));
+        setBackground(new Background(new BackgroundImage(image, null, null, null, null)));
+
+
+
         Ball ball = new Ball(30, 30, 10, Color.FIREBRICK);
         Ball ball2 = new Ball(30, 70, 20, Color.CORNFLOWERBLUE);
         BallController ballController = new BallController(ball, this);
         BallController ballController2 = new BallController(ball2, this);
 
-        Brick brick = new Brick(50, 50, 10, 50, Color.CORAL);
+        Brick brick = Brick.getRandStdBrick();
         BrickController brickController = new BrickController(Brick.getRandStdBrick(), this, 1);
 
-        Brick brick2 = new Brick(50, 50, 50, 50, Color.CORAL);
-        conBrickController = new ConBrickController(brick2, this, 1);
+        Brick brick2 = Brick.getConBrick();
 
-        conBrickController.getShape().requestFocus();
+        conBrickController = new ConBrickController(brick2, this);
 
         getChildren().add(ballController.getShape());
         getChildren().add(ballController2.getShape());
