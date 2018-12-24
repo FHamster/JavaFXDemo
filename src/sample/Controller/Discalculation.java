@@ -1,10 +1,12 @@
 package sample.Controller;
 
 import sample.GameObjectView.Ball;
+import sample.GameObjectView.Brick;
 
 import java.awt.*;
 
 public class Discalculation {
+
 
     public static double disccl(Ball ball, Rectangle rec){
 
@@ -22,18 +24,22 @@ public class Discalculation {
         return  Math.min(dis, disco) ;
     }
 
-    public static double disVC(Ball ball, Rectangle rec){
+    public static double disVC(Ball ball, Brick brick){
 
         double v = 0;
 
-        Point p = new Point((int)rec.getCenterX(), (int)rec.getCenterY());
-        Point c = new Point((int)Math.abs(ball.getCenterX() - p.x), (int)Math.abs(ball.getCenterY() - p.y));
-        Point h = new Point((int)(rec.getWidth() / 2), (int)(rec.getHeight() / 2));
-        Point dis = new Point((int)(c.x - h.x), (int)(c.y - h.y));
+        Point c = new Point();
+        Point p = new Point();
+        Point h = new Point();
+        Point dis = new Point();
 
-        dis.setLocation(Math.max(dis.x,0),Math.max(dis.y,0));
+        c.setLocation((int) brick.getX() + (int)brick.getWidth() / 2, (int)brick.getY() + (int)brick.getHeight() / 2);
+        p.setLocation((int)Math.abs(ball.getCenterX() - (int)c.getX()), (int)Math.abs(ball.getCenterY() - c.getY()));
+        h.setLocation((int)brick.getWidth()  / 2, (int)brick.getY() /2);
+        dis.setLocation((int)p.x - h.x, (int)p.y - h.y);
+        dis.setLocation((int)Math.max(dis.x,0),(int)Math.max(dis.y,0));
         if(ball.getRadius()==10)
-        System.out.println( c);
+            System.out.println( brick);
         return  Math.sqrt(dis.x * dis.x + dis.y * dis.y);
     }
 }

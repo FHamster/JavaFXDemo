@@ -5,12 +5,13 @@ import javafx.animation.Timeline;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import sample.GameObjectView.Brick;
+import sample.GamePane;
 
 public class ConBrickController extends AbstractController
 {
-    Brick brick;
+    private Brick brick;
 
-    public ConBrickController(Brick brick, Pane pane)
+    public ConBrickController(Brick brick, GamePane pane)
     {
         super(pane, null);
         super.setAnimation(new Timeline(new KeyFrame(Duration.millis(10))));

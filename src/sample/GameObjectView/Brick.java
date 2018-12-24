@@ -3,6 +3,7 @@ package sample.GameObjectView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 
 /**
@@ -10,6 +11,7 @@ import javafx.scene.shape.Rectangle;
  */
 public class Brick extends Rectangle
 {
+
     /**
      * 制造可控制挡板view的工厂方法
      *
@@ -17,7 +19,7 @@ public class Brick extends Rectangle
      */
     public static Brick getConBrick()
     {
-        return new Brick(50, 150, 1000, 20, Color.LAVENDER, 10, 10);
+        return new Brick(300, 700, 200, 20, Color.LAVENDER, 10, 10);
     }
 
     /**
@@ -27,7 +29,7 @@ public class Brick extends Rectangle
      */
     public static Brick getRandStdBrick()
     {
-        return new Brick(0, 0, 100, 30, Color.CYAN, 15, 15);
+        return new Brick(10, 100, 1000, 10, Color.CYAN, 15, 15);
     }
 
     /**

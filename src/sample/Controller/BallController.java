@@ -7,6 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 import sample.GameObjectView.Ball;
+import sample.GameObjectView.Brick;
 import sample.GamePane;
 
 import java.awt.*;
@@ -68,12 +69,13 @@ public class BallController extends AbstractController
 
         boolean flag = false;
         // Check boundaries
-       if(Discalculation.disVC(ball, new Rectangle(50,150,1000,0)) <= ball.getRadius()){
-           dx *= -1;
-           dy *= -1;
+        if (Discalculation.disVC(ball, getPane().getConBrickController().getShape()) <= ball.getRadius())
+        {
+            dx *= -1;
+            dy *= -1;
 
-           flag = true;
-       }
+            flag = true;
+        }
 
         return flag;
     }
