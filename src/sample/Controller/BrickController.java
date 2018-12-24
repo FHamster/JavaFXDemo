@@ -6,7 +6,7 @@ import javafx.util.Duration;
 import sample.GameObjectView.Brick;
 import sample.GamePane;
 
-public class BrickController extends AbstractController
+public class  BrickController extends AbstractController
 {
     private int HP;
     private Brick brick;

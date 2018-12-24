@@ -9,9 +9,11 @@ import javafx.util.Duration;
 import sample.GameObjectView.Ball;
 import sample.GamePane;
 
+import java.awt.*;
+
 public class BallController extends AbstractController
 {
-    private Ball ball;
+    private  Ball ball;
 
     private double dx;
     private double dy;
@@ -57,9 +59,28 @@ public class BallController extends AbstractController
         return flag;
     }
 
+    boolean isBric (){
+        double x = ball.getCenterX();
+        double y = ball.getCenterY();
+        double radius = ball.getRadius();
+        Pane pane = this.getPane();
+
+
+        boolean flag = false;
+        // Check boundaries
+       if(Discalculation.disVC(ball, new Rectangle(50,150,1000,0)) <= ball.getRadius()){
+           dx *= -1;
+           dy *= -1;
+
+           flag = true;
+       }
+
+        return flag;
+    }
     public void move()
     {
         isBound();
+        isBric();
 
         ball.setCenterX(ball.getCenterX() + dx);
         ball.setCenterY(ball.getCenterY() + dy);

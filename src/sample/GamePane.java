@@ -11,12 +11,10 @@ import sample.GameObjectView.Ball;
 import sample.GameObjectView.Brick;
 
 
-public class GamePane extends Pane
-{
+public class GamePane extends Pane {
     ConBrickController conBrickController;
 
-    public GamePane()
-    {
+    public GamePane() {
         setMinSize(600, 800);
         setMaxSize(600, 800);
 
@@ -24,11 +22,14 @@ public class GamePane extends Pane
         setBackground(new Background(new BackgroundImage(image, null, null, null, null)));
 
 
-
-        Ball ball = new Ball(30, 30, 10, Color.FIREBRICK);
+        Ball ball = new Ball(100, 300, 10, Color.FIREBRICK);
         Ball ball2 = new Ball(30, 70, 20, Color.CORNFLOWERBLUE);
+        Ball ball3 = new Ball(300, 70, 20, Color.CORNFLOWERBLUE);
+        Ball ball4 = new Ball(30, 700, 20, Color.CORNFLOWERBLUE);
         BallController ballController = new BallController(ball, this);
         BallController ballController2 = new BallController(ball2, this);
+        BallController ballController3 = new BallController(ball3, this);
+        BallController ballController4 = new BallController(ball4, this);
 
         Brick brick = Brick.getRandStdBrick();
         BrickController brickController = new BrickController(Brick.getRandStdBrick(), this, 1);
@@ -39,33 +40,39 @@ public class GamePane extends Pane
 
         getChildren().add(ballController.getShape());
         getChildren().add(ballController2.getShape());
+        getChildren().add(ballController3.getShape());
+        getChildren().add(ballController4.getShape());
         getChildren().add(brickController.getShape());
         getChildren().add(conBrickController.getShape());
 
-        setOnKeyPressed(e->{
-            switch (e.getCode())
-            {
-                case A:conBrickController.moveLeft();
+        setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case A:
+                    conBrickController.moveLeft();
                     break;
-                case D:conBrickController.moveRight();
+                case D:
+                    conBrickController.moveRight();
                     break;
             }
         });
+
 
         Thread t = new Thread(ballController);
         Thread t2 = new Thread(ballController2);
         Thread t3 = new Thread(brickController);
         Thread t4 = new Thread(conBrickController);
+        Thread t5 = new Thread(ballController3);
+        Thread t6 = new Thread(ballController4);
         t.start();
         t2.start();
         t3.start();
         t4.start();
-
+        t5.start();
+        t6.start();
 
     }
 
-    public ConBrickController getConBrickController()
-    {
+    public ConBrickController getConBrickController() {
         return conBrickController;
     }
 }

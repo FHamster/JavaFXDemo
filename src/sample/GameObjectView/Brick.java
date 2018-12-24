@@ -17,7 +17,7 @@ public class Brick extends Rectangle
      */
     public static Brick getConBrick()
     {
-        return new Brick(0, 0, 250, 20, Color.LAVENDER, 10, 10);
+        return new Brick(50, 150, 1000, 20, Color.LAVENDER, 10, 10);
     }
 
     /**
