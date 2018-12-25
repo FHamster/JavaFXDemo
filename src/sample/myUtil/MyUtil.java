@@ -4,6 +4,8 @@ package sample.myUtil;
 import sample.GameObjectView.Ball;
 import sample.GameObjectView.Brick;
 
+import java.util.Random;
+
 public interface MyUtil
 {
     /**
@@ -14,4 +16,18 @@ public interface MyUtil
      * @return 点到线段的距离, 不存在返回-1
      */
     double LineToPointLength(Ball ball, Brick brick);
+
+    /**
+     * @param min
+     * @param max
+     * @return 返回分布在[min, max]的随机整数
+     */
+     static  int getRandomNumber(int min, int max)
+    {
+        if (min > max)
+        {
+            throw new IllegalArgumentException("min =" + min + ">" + "max=" + max);
+        }
+        return min + new Random().nextInt(max + 1 - min);
+    }
 }

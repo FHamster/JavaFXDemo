@@ -4,13 +4,32 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import sample.myUtil.MyUtil;
 
 
 /**
- *砖块/挡板视图类，用于制造砖块和挡板的view
+ * 砖块/挡板视图类，用于制造砖块和挡板的view
  */
 public class Brick extends Rectangle
 {
+
+    //配色表
+    private static Color[] colorShell = {
+            Color.rgb(95, 217, 205),
+            Color.rgb(234, 247, 134),
+            Color.rgb(255, 181, 161),
+            Color.rgb(184, 255, 184),
+            Color.rgb(184, 244, 255),
+    };
+
+    //标准砖块的长宽
+    private static final int StdBrickWidth = 100;
+    private static final int StdBrickHeight = 30;
+
+
+    //控制挡板的长宽
+    private static final int ConBrickWidth = 100;
+    private static final int ConBrickHeight = 100;
 
     /**
      * 制造可控制挡板view的工厂方法
@@ -19,7 +38,7 @@ public class Brick extends Rectangle
      */
     public static Brick getConBrick()
     {
-        return new Brick(300, 700, 200, 20, Color.LAVENDER, 10, 10);
+        return new Brick(300, 700, StdBrickWidth, ConBrickHeight, colorShell[0], 10, 10);
     }
 
     /**
@@ -29,7 +48,8 @@ public class Brick extends Rectangle
      */
     public static Brick getRandStdBrick()
     {
-        return new Brick(10, 50, 100, 30, Color.CYAN, 15, 15);
+//        Color color = ;
+        return new Brick(0, 0, ConBrickWidth, ConBrickHeight, colorShell[MyUtil.getRandomNumber(1,4)], 15, 15);
     }
 
     /**
