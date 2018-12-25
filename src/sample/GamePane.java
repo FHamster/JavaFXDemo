@@ -10,6 +10,9 @@ import sample.Controller.*;
 import sample.GameObjectView.Ball;
 import sample.GameObjectView.Brick;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class GamePane extends Pane {
     ConBrickController conBrickController;
@@ -31,18 +34,23 @@ public class GamePane extends Pane {
 //        BallController ballController3 = new BallController(ball3, this);
 //        BallController ballController4 = new BallController(ball4, this);
 
-        Brick brick = Brick.getRandStdBrick();
-        BrickController brickController = new BrickController(Brick.getRandStdBrick(), this, 1);
+//        Brick brick = Brick.getRandStdBrick();
+//        BrickController brickController = new BrickController(Brick.getRandStdBrick(), this, 1);
 
         Brick brick2 = Brick.getConBrick();
 
         conBrickController = new ConBrickController(brick2, this);
 
+        List<Brick> list = createBrick();
+        for(Brick e : list){
+            BrickController brickController = new BrickController(e, this, 1);
+            getChildren().add(brickController.getShape());
+        }
 //        getChildren().add(ballController.getShape());
         getChildren().add(ballController2.getShape());
 //        getChildren().add(ballController3.getShape());
 //        getChildren().add(ballController4.getShape());
-        getChildren().add(brickController.getShape());
+//        getChildren().add(brickController.getShape());
         getChildren().add(conBrickController.getShape());
 
         setOnMouseMoved(e -> conBrickController.MouseMove(e));
@@ -52,17 +60,37 @@ public class GamePane extends Pane {
 
 //        Thread t = new Thread(ballController);
         Thread t2 = new Thread(ballController2);
-        Thread t3 = new Thread(brickController);
+//        Thread t3 = new Thread(brickController);
         Thread t4 = new Thread(conBrickController);
 //        Thread t5 = new Thread(ballController3);
 //        Thread t6 = new Thread(ballController4);
 //        t.start();
         t2.start();
-        t3.start();
+//        t3.start();
         t4.start();
 //        t5.start();
 //        t6.start();
 
+    }
+
+    public List createBrick(){
+        List<Brick> list = new ArrayList<Brick>();
+        int dx,dy;
+        dx = (int) Brick.getRandStdBrick().getX();
+        dy = (int) Brick.getRandStdBrick().getY();
+        int dwight = (int)Brick.getRandStdBrick().getWidth();
+        int dhight = (int)Brick.getRandStdBrick().getHeight();
+
+        for(int i = 0; i < 3; i++){
+            int x = dx;
+            for(int j = 0; j < 6; j ++){
+                list.add(new Brick(x, dy, dwight, dhight, Color.CYAN,15 ,15));
+                x += dwight;
+            }
+            dy += dhight;
+        }
+
+        return  list;
     }
 
     public ConBrickController getConBrickController() {
