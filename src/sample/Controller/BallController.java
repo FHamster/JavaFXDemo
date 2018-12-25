@@ -7,22 +7,20 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 import sample.GameObjectView.Ball;
-import sample.GameObjectView.Brick;
 import sample.GamePane;
-
-import java.awt.*;
 
 /**
  * 砖块的控制类
  * 操作砖块
+ *
  * @author gaoxin
  */
 public class BallController extends AbstractController
 {
     //目标控制对象
-    private  Ball ball;
+    private Ball ball;
 
-    //
+    //球的速度方向
     private double dx;
     private double dy;
 
@@ -67,7 +65,8 @@ public class BallController extends AbstractController
         return flag;
     }
 
-    boolean isBric (){
+    boolean isBric()
+    {
         double x = ball.getCenterX();
         double y = ball.getCenterY();
         double radius = ball.getRadius();
@@ -78,14 +77,21 @@ public class BallController extends AbstractController
         // Check boundaries
         if (Discalculation.disVC(ball, getPane().getConBrickController().getShape()) <= ball.getRadius())
         {
-            dx *= -1;
-            dy *= -1;
-
-            flag = true;
+            if((ball.getCenterY() < getPane().getConBrickController().getShape().getY() ||
+                    ball.getCenterY() >getPane().getConBrickController().getShape().getY() +
+                            getPane().getConBrickController().getShape().getHeight())){
+                dy *= -1;
+                flag = true;
+            }else if((ball.getCenterX() < getPane().getConBrickController().getShape().getX() ||
+                    ball.getCenterX() >getPane().getConBrickController().getShape().getX() +
+                            getPane().getConBrickController().getShape().getWidth())){
+                dx *= -1;
+                flag = true;
+            }
         }
-
         return flag;
     }
+
     public void move()
     {
         isBound();

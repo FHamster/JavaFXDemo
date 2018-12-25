@@ -45,16 +45,9 @@ public class GamePane extends Pane {
         getChildren().add(brickController.getShape());
         getChildren().add(conBrickController.getShape());
 
-        setOnKeyPressed(e -> {
-            switch (e.getCode()) {
-                case A:
-                    conBrickController.moveLeft();
-                    break;
-                case D:
-                    conBrickController.moveRight();
-                    break;
-            }
-        });
+        setOnMouseMoved(e -> conBrickController.MouseMove(e));
+
+        setOnKeyPressed(e -> conBrickController.KeyMove(e));
 
 
 //        Thread t = new Thread(ballController);
