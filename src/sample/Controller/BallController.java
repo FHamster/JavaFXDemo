@@ -9,8 +9,7 @@ import javafx.util.Duration;
 import sample.GameObjectView.Ball;
 import sample.GameObjectView.Brick;
 import sample.GamePane;
-
-import java.awt.*;
+import sample.myUtil.Discalculation;
 
 /**
  * 砖块的控制类
@@ -67,30 +66,60 @@ public class BallController extends AbstractController
         return flag;
     }
 
-    boolean isBric (){
+    boolean isconBrick (){
         double x = ball.getCenterX();
         double y = ball.getCenterY();
         double radius = ball.getRadius();
         Pane pane = this.getPane();
-
+        Brick conBrick = getPane().getConBrickController().getShape();
 
         boolean flag = false;
         // Check boundaries
         if (Discalculation.disVC(ball, getPane().getConBrickController().getShape()) <= ball.getRadius())
         {
+            if((ball.getCenterY() < conBrick.getY() || ball.getCenterY() >conBrick.getY() + conBrick.getHeight())){
+                dy *= -1;
+                flag = true;
+            }else if((ball.getCenterX() < conBrick.getX() || ball.getCenterX() > conBrick.getX() + conBrick.getWidth())){
+                dx *= -1;
+                flag = true;
+            }
+        }
+
+        if(ball.getCenterX() > conBrick.getX() && ball.getCenterX() < conBrick.getX() + conBrick.getWidth() &&
+                ((ball.getCenterY() > conBrick.getY() && ball.getCenterY() < conBrick.getY() + conBrick.getHeight())
+                || conBrick.getY() + conBrick.getHeight() / 2 - ball.getCenterY() < conBrick.getHeight() / 2 + ball.getRadius()) ){
+            ball.setCenterY(ball.getCenterY() - 2 * ball.getRadius());
             dx *= -1;
             dy *= -1;
-
             flag = true;
         }
 
+
         return flag;
     }
+
+    public void dischange(int flag){
+        switch (flag){
+            case 1 : dy *= -1;
+                    break;
+            case 2 : dx *= -1;
+                    break;
+            case 3 : ball.setCenterY(ball.getCenterY() - 2 * ball.getRadius());
+                     dx *= -1;
+                     dy *= -1;
+                     break;
+            default: break;
+
+        }
+    }
+
     public void move()
     {
         isBound();
-        isBric();
-
+        isconBrick();
+        int flag = getPane().isBrick(ball);
+        dischange(flag);
         ball.setCenterX(ball.getCenterX() + dx);
         ball.setCenterY(ball.getCenterY() + dy);
     }

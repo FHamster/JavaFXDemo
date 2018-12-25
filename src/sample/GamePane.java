@@ -9,6 +9,9 @@ import javafx.scene.paint.Color;
 import sample.Controller.*;
 import sample.GameObjectView.Ball;
 import sample.GameObjectView.Brick;
+import sample.myUtil.Discalculation;
+import sample.myUtil.MyUtil;
+import sample.myUtil.MyVector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +19,7 @@ import java.util.List;
 
 public class GamePane extends Pane {
     ConBrickController conBrickController;
-
+    List<Brick> list;
     public GamePane() {
         setMinSize(600, 800);
         setMaxSize(600, 800);
@@ -41,7 +44,7 @@ public class GamePane extends Pane {
 
         conBrickController = new ConBrickController(brick2, this);
 
-        List<Brick> list = createBrick();
+        list = createBrick();
         for(Brick e : list){
             BrickController brickController = new BrickController(e, this, 1);
             getChildren().add(brickController.getShape());
@@ -91,13 +94,41 @@ public class GamePane extends Pane {
         for(int i = 0; i < 3; i++){
             int x = dx;
             for(int j = 0; j < 6; j ++){
-                list.add(new Brick(x, dy, dwight, dhight, Color.CYAN,15 ,15));
+                Brick brick = Brick.getRandStdBrick();
+                brick.setX(x);
+                brick.setY(dy);
+                list.add(brick);
                 x += dwight;
             }
             dy += dhight;
         }
 
         return  list;
+    }
+
+
+    public int isBrick(Ball ball){
+
+        int disController = -1;
+        int flag = MyVector.myFlag(ball, list);
+        if(flag < 0)
+            return  disController;
+
+        Brick brick = list.get(flag);
+
+        if((ball.getCenterY() < brick.getX() || ball.getCenterY() > brick.getY() + brick.getHeight())){
+            disController = 1;
+        }else if((ball.getCenterX() < brick.getX() || ball.getCenterX() > brick.getX() + brick.getWidth())){
+            disController = 2;
+        }else if(ball.getCenterX() > brick.getX() && ball.getCenterX() < brick.getX() + brick.getWidth() &&
+                ((ball.getCenterY() > brick.getY() && ball.getCenterY() < brick.getY() + brick.getHeight())
+                        || brick.getY() + brick.getHeight() / 2 - ball.getCenterY() < brick.getHeight() / 2 + ball.getRadius()) ) {
+            disController = 3;
+        }
+
+        MyVector.myDelete(list,flag);
+
+        return  disController;
     }
 
     public ConBrickController getConBrickController() {

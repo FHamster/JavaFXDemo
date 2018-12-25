@@ -1,4 +1,4 @@
-package sample.Controller;
+package sample.myUtil;
 
 import sample.GameObjectView.Ball;
 import sample.GameObjectView.Brick;
