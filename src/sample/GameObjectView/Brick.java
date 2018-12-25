@@ -38,7 +38,7 @@ public class Brick extends Rectangle
      */
     public static Brick getConBrick()
     {
-        return new Brick(300, 700, 100,25, colorShell[0], 10, 10);
+        return new Brick(300, 700, StdBrickWidth, ConBrickHeight, colorShell[0], 10, 10);
     }
 
     /**
@@ -49,7 +49,7 @@ public class Brick extends Rectangle
     public static Brick getRandStdBrick()
     {
 //        Color color = ;
-        return new Brick(30, 0, 90, 30,colorShell[MyUtil.getRandomNumber(1,4)], 15, 15);
+        return new Brick(0, 0, ConBrickWidth, ConBrickHeight, colorShell[MyUtil.getRandomNumber(1,4)], 15, 15);
     }
 
     /**
@@ -69,6 +69,5 @@ public class Brick extends Rectangle
         super.setFill(paint);
         super.setArcHeight(arcHeight);
         super.setArcWidth(arcWidth);
-        super.setStroke(Color.BLACK);
     }
 }
