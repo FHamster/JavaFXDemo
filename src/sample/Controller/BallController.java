@@ -12,10 +12,17 @@ import sample.GamePane;
 
 import java.awt.*;
 
+/**
+ * 砖块的控制类
+ * 操作砖块
+ * @author gaoxin
+ */
 public class BallController extends AbstractController
 {
+    //目标控制对象
     private  Ball ball;
 
+    //
     private double dx;
     private double dy;
 

@@ -7,6 +7,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import sample.GamePane;
 
+/**
+ * 控制器的抽象基类
+ * 内含目标控制对象的面板及其动画方案
+ * 并要求其子类覆盖getShape方法
+ */
 public abstract class AbstractController implements Runnable
 {
     private GamePane pane;
@@ -38,5 +43,9 @@ public abstract class AbstractController implements Runnable
         this.animation = animation;
     }
 
+    /**
+     * 返回目标控制对象的view
+     * @return
+     */
     public abstract Shape getShape();
 }

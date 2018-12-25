@@ -2,11 +2,15 @@ package sample.Controller;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import sample.GameObjectView.Brick;
 import sample.GamePane;
 
+/**
+ * 挡板的控制类
+ * 操作挡板
+ * @author gaoxin
+ */
 public class ConBrickController extends AbstractController
 {
     private Brick brick;

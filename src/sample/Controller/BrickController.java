@@ -6,6 +6,11 @@ import javafx.util.Duration;
 import sample.GameObjectView.Brick;
 import sample.GamePane;
 
+/**
+ * 砖块的控制类
+ * 操作砖块
+ * @author gaoxin
+ */
 public class  BrickController extends AbstractController
 {
     private int HP;
