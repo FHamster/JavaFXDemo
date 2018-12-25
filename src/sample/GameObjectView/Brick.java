@@ -29,7 +29,7 @@ public class Brick extends Rectangle
      */
     public static Brick getRandStdBrick()
     {
-        return new Brick(10, 100, 1000, 10, Color.CYAN, 15, 15);
+        return new Brick(10, 50, 100, 30, Color.CYAN, 15, 15);
     }
 
     /**

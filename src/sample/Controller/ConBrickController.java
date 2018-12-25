@@ -14,7 +14,7 @@ public class ConBrickController extends AbstractController
     public ConBrickController(Brick brick, GamePane pane)
     {
         super(pane, null);
-        super.setAnimation(new Timeline(new KeyFrame(Duration.millis(10))));
+        super.setAnimation(new Timeline(new KeyFrame(Duration.millis(1))));
 
         this.brick = brick;
     }
@@ -26,12 +26,12 @@ public class ConBrickController extends AbstractController
 
     public void moveLeft()
     {
-        brick.setX(brick.getX() - 5);
+        brick.setX(brick.getX() - 10);
     }
 
     public void moveRight()
     {
-        brick.setX(brick.getX() + 5);
+        brick.setX(brick.getX() + 10);
     }
 
     @Override
