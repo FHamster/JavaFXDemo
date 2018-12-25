@@ -19,7 +19,7 @@ import java.util.List;
 
 public class GamePane extends Pane {
     ConBrickController conBrickController;
-    List<Brick> list;
+    List<BrickController> list;
     public GamePane() {
         setMinSize(600, 800);
         setMaxSize(600, 800);
@@ -45,9 +45,8 @@ public class GamePane extends Pane {
         conBrickController = new ConBrickController(brick2, this);
 
         list = createBrick();
-        for(Brick e : list){
-            BrickController brickController = new BrickController(e, this, 1);
-            getChildren().add(brickController.getShape());
+        for(BrickController e : list){
+            getChildren().add(e.getShape());
         }
 //        getChildren().add(ballController.getShape());
         getChildren().add(ballController2.getShape());
@@ -77,20 +76,21 @@ public class GamePane extends Pane {
     }
 
     public List createBrick(){
-        List<Brick> list = new ArrayList<Brick>();
+        List<BrickController> list = new ArrayList<BrickController>();
         int dx,dy;
         dx = (int) Brick.getRandStdBrick().getX();
         dy = (int) Brick.getRandStdBrick().getY();
         int dwight = (int)Brick.getRandStdBrick().getWidth();
         int dhight = (int)Brick.getRandStdBrick().getHeight();
 
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < 10; i++){
             int x = dx;
             for(int j = 0; j < 6; j ++){
                 Brick brick = Brick.getRandStdBrick();
                 brick.setX(x);
                 brick.setY(dy);
-                list.add(brick);
+                BrickController brickController = new BrickController(brick, this, 1);
+                list.add(brickController);
                 x += dwight;
             }
             dy += dhight;
@@ -107,7 +107,7 @@ public class GamePane extends Pane {
         if(flag < 0)
             return  disController;
 
-        Brick brick = list.get(flag);
+        Brick brick = list.get(flag).getShape();
 
         if((ball.getCenterY() < brick.getX() || ball.getCenterY() > brick.getY() + brick.getHeight())){
             disController = 1;
@@ -120,7 +120,7 @@ public class GamePane extends Pane {
         }
 
         MyVector.myDelete(list,flag);
-
+        getChildren().remove(list.get(flag));
         return  disController;
     }
 

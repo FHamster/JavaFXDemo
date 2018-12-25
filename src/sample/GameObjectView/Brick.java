@@ -23,13 +23,13 @@ public class Brick extends Rectangle
     };
 
     //标准砖块的长宽
-    private static final int StdBrickWidth = 100;
+    private static final int StdBrickWidth = 90;
     private static final int StdBrickHeight = 30;
 
 
     //控制挡板的长宽
     private static final int ConBrickWidth = 100;
-    private static final int ConBrickHeight = 100;
+    private static final int ConBrickHeight = 20;
 
     /**
      * 制造可控制挡板view的工厂方法
@@ -38,7 +38,7 @@ public class Brick extends Rectangle
      */
     public static Brick getConBrick()
     {
-        return new Brick(300, 700, StdBrickWidth, ConBrickHeight, colorShell[0], 10, 10);
+        return new Brick(300, 700, ConBrickWidth, ConBrickHeight, colorShell[0], 10, 10);
     }
 
     /**
@@ -49,7 +49,7 @@ public class Brick extends Rectangle
     public static Brick getRandStdBrick()
     {
 //        Color color = ;
-        return new Brick(0, 0, ConBrickWidth, ConBrickHeight, colorShell[MyUtil.getRandomNumber(1,4)], 15, 15);
+        return new Brick(30, 0, StdBrickWidth, StdBrickHeight, colorShell[MyUtil.getRandomNumber(1,4)], 15, 15);
     }
 
     /**

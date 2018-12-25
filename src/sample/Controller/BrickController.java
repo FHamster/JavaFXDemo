@@ -37,7 +37,7 @@ public class  BrickController extends AbstractController
         this.brick = brick;
 
 
-        BrickFade();
+//        BrickFade();
     }
 
     public void BrickFade()

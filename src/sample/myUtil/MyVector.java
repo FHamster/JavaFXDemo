@@ -3,6 +3,7 @@ package sample.myUtil;
 
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Line;
+import sample.Controller.BrickController;
 import sample.GameObjectView.Ball;
 import sample.GameObjectView.Brick;
 
@@ -17,10 +18,10 @@ import java.util.List;
  */
 public class MyVector
 {
-    public static int myFlag(Ball ball ,List<Brick> list){
+    public static int myFlag(Ball ball ,List<BrickController> list){
         int flag = -1;
         for(int i = 0; i < list.size(); i ++){
-            if(Discalculation.disVC(ball, list.get(i)) <= ball.getRadius()){
+            if(Discalculation.disVC(ball, list.get(i).getShape()) <= ball.getRadius()){
                 flag = i;
                 break;
             }
@@ -28,11 +29,12 @@ public class MyVector
         return flag;
     }
 
-    public static boolean myDelete(List<Brick> list, int flag){
+    public static boolean myDelete(List<BrickController> list, int flag){
         if(flag == -1)
             return false;
         else {
             //消失动画
+            list.get(flag).BrickFade();
             list.remove(flag);
             return  true;
         }
