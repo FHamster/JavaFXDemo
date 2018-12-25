@@ -28,13 +28,13 @@ public class BallController extends AbstractController
     public BallController(Ball ball, GamePane pane)
     {
         super(pane, null);
-        super.setAnimation(new Timeline(new KeyFrame(Duration.millis(5), e -> move())));
+        super.setAnimation(new Timeline(new KeyFrame(Duration.millis(1), e -> move())));
         this.ball = ball;
 
         getAnimation().setCycleCount(Animation.INDEFINITE);
 
-        dx = 1;
-        dy = 1;
+        dx = 0.3;
+        dy = 0.3;
     }
 
 
