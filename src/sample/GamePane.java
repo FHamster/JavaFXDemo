@@ -2,20 +2,16 @@ package sample;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import sample.Controller.*;
 import sample.GameObjectView.Ball;
 import sample.GameObjectView.Brick;
-import sample.myUtil.Discalculation;
-import sample.myUtil.MyUtil;
-import sample.myUtil.MyVector;
+import sample.myUtil.CreateBrick;
+import sample.myUtil.CreateBrickPane;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 
 public class GamePane extends Pane {
@@ -38,7 +34,7 @@ public class GamePane extends Pane {
 
         conBrickController = new ConBrickController(brick2, this);
 
-        saveBrick = createBrick();
+        saveBrick = CreateBrick.createBrick(this);
         for(int i = 0; i < 6; i ++){
             for(int j = 0; j < 6; j ++){
                 getChildren().add(saveBrick[i][j].getShape());
@@ -61,59 +57,49 @@ public class GamePane extends Pane {
         t2.start();
         t4.start();
 
+
     }
 
-    public List createBrickList(){
-        List<BrickController> list = new Vector<BrickController>();
-        int dx,dy;
-        dx = (int) Brick.getRandStdBrick().getX();
-        dy = (int) Brick.getRandStdBrick().getY();
-        int dwight = (int)Brick.getRandStdBrick().getWidth();
-        int dhight = (int)Brick.getRandStdBrick().getHeight();
-
-        for(int i = 0; i < 2; i++){
-            int x = dx;
-            for(int j = 0; j < 6; j ++){
-                Brick brick = Brick.getRandStdBrick();
-                brick.setX(x);
-                brick.setY(dy);
-                BrickController brickController = new BrickController(brick, this, 1);
-                list.add(brickController);
-                x += dwight;
-            }
-            dy += dhight;
+//    public List createBrickList() {
+//
+//        List<BrickController> list = new Vector<BrickController>();
+//        int dx, dy;
+//        dx = (int) Brick.getRandStdBrick().getX();
+//        dy = (int) Brick.getRandStdBrick().getY();
+//        int dwight = (int) Brick.getRandStdBrick().getWidth();
+//        int dhight = (int) Brick.getRandStdBrick().getHeight();
+//
+//        for (int i = 0; i < 2; i++) {
+//            int x = dx;
+//            for (int j = 0; j < 6; j++) {
+//                Brick brick = Brick.getRandStdBrick();
+//                brick.setX(x);
+//                brick.setY(dy);
+//                BrickController brickController = new BrickController(brick, this, 1);
+//                list.add(brickController);
+//                x += dwight;
+//            }
+//            dy += dhight;
+//        }
+//
+//        return list;
+//    }
+/*
+    public Brick SetBrickLo(int i, int j) {
+    }*/
+    public void addShape(){
+        int i = 0;
+        for(int j = 0; j < 6; j ++){
+            getChildren().add(saveBrick[i][j].getShape());
         }
-
-        return  list;
     }
 
-    public BrickController[][] createBrick(){
-        BrickController[][]  save = new BrickController[6][6];
-        int dx,dy;
-        dx = (int) Brick.getRandStdBrick().getX();
-        dy = (int) Brick.getRandStdBrick().getY();
-        int dwight = (int)Brick.getRandStdBrick().getWidth();
-        int dhight = (int)Brick.getRandStdBrick().getHeight();
-
-        for(int i = 0; i < 6; i++){
-            int x = dx;
-            for(int j = 0; j < 6; j ++){
-                Brick brick = Brick.getRandStdBrick();
-                brick.setX(x);
-                brick.setY(dy);
-                save[i][j] = new BrickController(brick, this, 1);
-                x += dwight;
-            }
-            dy += dhight;
-        }
-        return save;
-    }
 
     public int isBrick(Ball ball){
 
         int disController = -1;
-//        int flag = MyVector.myFlag(ball, list);
-        int flag = MyVector.myFlag(ball,saveBrick);
+//        int flag = CreateBrickPane.myFlag(ball, list);
+        int flag = CreateBrickPane.myFlag(ball,saveBrick);
 
         if(flag < 0)
             return  disController;
@@ -131,9 +117,9 @@ public class GamePane extends Pane {
             disController = 3;
         }
 
-//        MyVector.myDelete(list,flag);
+//        CreateBrickPane.myDelete(list,flag);
 //        getChildren().remove(list.get(flag));
-        MyVector.myDelete(saveBrick,flag);
+        CreateBrickPane.myDelete(saveBrick,flag);
         getChildren().remove(saveBrick[flag / 10][flag % 10]);
 
         return  disController;

@@ -2,6 +2,7 @@ package sample.Controller;
 
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import sample.GameObjectView.Brick;
 import sample.GamePane;
@@ -22,7 +23,7 @@ public class  BrickController extends AbstractController
     //hp为0时砖块死亡
     private int HP;
 
-    public BrickController(Brick brick, GamePane pane, int HP)
+    public BrickController(Brick brick,GamePane pane, int HP)
     {
         super(pane, null);
         FadeTransition FT = new FadeTransition(Duration.millis(1000), brick);
@@ -56,4 +57,5 @@ public class  BrickController extends AbstractController
     {
         return brick;
     }
+
 }
