@@ -23,6 +23,7 @@ public class CreateBrickPane
 //        return flag;
 //    }
 
+    //碰撞砖块坐标搜索
     public static int myFlag(Ball ball ,BrickController[][] save){
         int flag = -1;
         for(int i = 0; i < 18; i ++){
@@ -49,6 +50,7 @@ public class CreateBrickPane
 //        }
 //    }
 
+    //砖块删除
     public static boolean myDelete(BrickController[][] save, int flag){
         if(flag == -1 || save[flag / 10][flag % 10] == null)
             return false;

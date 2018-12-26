@@ -7,7 +7,7 @@ import sample.GamePane;
 public class CreateBrick {
     //创建二维数组
     public  static BrickController[][] createBrick(GamePane pane){
-        BrickController[][]  save = new BrickController[18][6];
+        BrickController[][]  save = new BrickController[19][6];
 
         //给二维数组加入控制器
         //按照二维数组ij编号创造单个砖块视图对象
@@ -19,6 +19,7 @@ public class CreateBrick {
         return save;
     }
 
+    //根据i，j定点砖块位置
     public static Brick setBrick(int i, int j){
         int dx,dy;
         dx = (int) Brick.getRandStdBrick().getX();
@@ -36,6 +37,7 @@ public class CreateBrick {
         return  brick;
     }
 
+    //砖块添加
     public static BrickController[][] addBrick (BrickController[][] save ,GamePane pane){
 
         int dhight = (int)Brick.getRandStdBrick().getHeight();
