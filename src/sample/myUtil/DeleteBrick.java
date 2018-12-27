@@ -10,7 +10,7 @@ import sample.GamePane;
 
 import java.util.List;
 
-public class CreateBrickPane
+public class DeleteBrick
 {
 //    public static int myFlag(Ball ball ,List<BrickController> list){
 //        int flag = -1;

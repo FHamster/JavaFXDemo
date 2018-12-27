@@ -4,9 +4,11 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import sample.GameObjectView.Brick;
 import sample.GamePane;
+import sample.RootPane;
 
 import java.beans.EventHandler;
 
@@ -47,6 +49,7 @@ public class ConBrickController extends AbstractController
     public void MouseMove(MouseEvent e)
     {
         brick.setX(e.getX() - brick.getWidth() / 2);
+
     }
 
     /**

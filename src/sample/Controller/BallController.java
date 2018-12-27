@@ -12,8 +12,8 @@ import sample.GamePane;
 import sample.myUtil.Discalculation;
 
 /**
- * 砖块的控制类
- * 操作砖块
+ * ball的控制类
+ * 操作ball
  * @author gaoxin
  */
 public class BallController extends AbstractController
@@ -55,6 +55,9 @@ public class BallController extends AbstractController
         return ball;
     }
 
+    /**
+    判断边界
+     */
     private boolean isBound()
     {
         double x = ball.getCenterX();
@@ -69,7 +72,7 @@ public class BallController extends AbstractController
         {
             dx *= -1; // Change ball move direction
             flag = true;
-        } else if (y < radius)
+        } else if (y < radius || y > pane.getHeight() - radius)
         {
             dy *= -1; // Change ball move direction
             flag = true;
@@ -78,11 +81,11 @@ public class BallController extends AbstractController
         return flag;
     }
 
+    /**
+     * 挡板碰撞判定
+     * @return
+     */
     boolean isconBrick (){
-        double x = ball.getCenterX();
-        double y = ball.getCenterY();
-        double radius = ball.getRadius();
-        Pane pane = this.getPane();
         Brick conBrick = getPane().getConBrickController().getShape();
 
         boolean flag = false;
@@ -110,7 +113,11 @@ public class BallController extends AbstractController
         return flag;
     }
 
-    public void dischange(int flag){
+    /**
+     * 碰撞方向改变
+     * @param flag
+     */
+    public void disChange(int flag){
         switch (flag){
             case 1 : dy *= -1;
                     break;
@@ -125,7 +132,11 @@ public class BallController extends AbstractController
         }
     }
 
-    public  boolean isBallLive(){
+    /**
+     * 小球存活判定
+     * @return
+     */
+    public boolean isBallLive(){
         Brick conBrick = getPane().getConBrickController().getShape();
 
         if(ball.getCenterY() > conBrick.getHeight() + conBrick.getY()){
@@ -134,18 +145,18 @@ public class BallController extends AbstractController
             return true;
         }
     }
+    public void ballFade()
+    {
+        getAnimation().play();
+    }
 
     public void move()
     {
         isBound();
         isconBrick();
-        int flag = getPane().isBrick(ball);
-        dischange(flag);
-        this.alive = isBallLive();
-        if(!alive){
-            getPane().deleteBall(this);
-
-        }
+        int flag = getPane().brickCatch(ball);
+        disChange(flag);
+        getPane().de();
         ball.setCenterX(ball.getCenterX() + dx);
         ball.setCenterY(ball.getCenterY() + dy);
     }
