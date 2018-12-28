@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import sample.controller.*;
 import sample.gameObjectView.Ball;
 import sample.gameObjectView.Brick;
+import sample.infoPane.controller.TimerController;
 import sample.myUtil.CreateBrick;
 
 
@@ -17,7 +18,7 @@ public class GamePane extends Pane
     //    List<BrickController> list;
     boolean[] ballNum = new boolean[5];
     BrickController[][] saveBrick;
-    Thread[] ballThread = new Thread[5];
+
     BallController[] ballControllers = new BallController[5];
 
     public GamePane()
@@ -54,11 +55,14 @@ public class GamePane extends Pane
 
         //t1.start();
 //        conBrickController.start();
+
     }
+
 
     //图形添加
     public void addShape()
     {
+        CreateBrick.addBrick(saveBrick, this);
         int i = 0;
         for (int j = 0; j < 6; j++)
         {
@@ -72,24 +76,25 @@ public class GamePane extends Pane
         {
             int num = ballController.getNum();
             ballNum[num] = false;
-            System.out.println("当前线程stop:" + ballThread[num].currentThread());
             ballController.ballFade();
             getChildren().remove(ballControllers[num]);
-//            try{
-//                ballThread[num].sleep(100000000);
-//                ballThread[num].interrupt();
-//                ballThread[num].join();
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
-//            finally {
-//                ballControllers[num] = null;
-//                return;
-//            }
+            if(calculatinBall() <= 0){
+                addBall();
+                addShape();
+            }
         } catch (Exception e)
         {
             e.printStackTrace();
         }
+    }
+
+    public int calculatinBall(){
+        int num = 0;
+        for(int i = 0; i < 3; i ++){
+            if(ballNum[i])
+                num ++;
+        }
+        return num;
     }
 
     public boolean addBall()
