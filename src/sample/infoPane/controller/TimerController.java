@@ -1,16 +1,17 @@
 package sample.infoPane.controller;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-import jdk.nashorn.internal.runtime.Timing;
 import sample.infoPane.bean.TimerBean;
 import sample.infoPane.view.TimerView;
 
-import javax.lang.model.element.AnnotationMirror;
-
+/**
+ * 计时器的控制器
+ * 已经开放了开始计时、暂停、重置接口
+ * 使用的时候只需要制造控制器对象
+ */
 public class TimerController
 {
     private TimerBean bean;
