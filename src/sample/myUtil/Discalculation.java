@@ -1,7 +1,7 @@
 package sample.myUtil;
 
-import sample.GameObjectView.Ball;
-import sample.GameObjectView.Brick;
+import sample.gameObjectView.Ball;
+import sample.gameObjectView.Brick;
 
 import java.awt.*;
 

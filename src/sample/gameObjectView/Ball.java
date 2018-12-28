@@ -1,4 +1,4 @@
-package sample.GameObjectView;
+package sample.gameObjectView;
 
 
 import javafx.scene.paint.Paint;

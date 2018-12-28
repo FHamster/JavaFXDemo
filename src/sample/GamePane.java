@@ -5,68 +5,71 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import sample.Controller.*;
-import sample.GameObjectView.Ball;
-import sample.GameObjectView.Brick;
+import sample.controller.*;
+import sample.gameObjectView.Ball;
+import sample.gameObjectView.Brick;
 import sample.myUtil.CreateBrick;
 
 
-public class GamePane extends Pane {
+public class GamePane extends Pane
+{
     ConBrickController conBrickController;
-//    List<BrickController> list;
+    //    List<BrickController> list;
     boolean[] ballNum = new boolean[5];
     BrickController[][] saveBrick;
     Thread[] ballThread = new Thread[5];
     BallController[] ballControllers = new BallController[5];
-    public GamePane() {
+
+    public GamePane()
+    {
+        //尺寸设置
         setMinSize(600, 800);
         setMaxSize(600, 800);
 
-
+        //背景设置
         Image image = new Image(getClass().getResourceAsStream("../img/background.png"));
         setBackground(new Background(new BackgroundImage(image, null, null, null, null)));
 
-
-//        Ball ball2 = new Ball(30, 730, 20, Color.CORNFLOWERBLUE);
-//
-//        BallController ballController2 = new BallController(ball2, this, 0);
-
         Brick brick2 = Brick.getConBrick();
-
         conBrickController = new ConBrickController(brick2, this);
-
         saveBrick = CreateBrick.createBrick(this);
-        for(int i = 0; i < 6; i ++){
-            for(int j = 0; j < 6; j ++){
+        for (int i = 0; i < 6; i++)
+        {
+            for (int j = 0; j < 6; j++)
+            {
                 getChildren().add(saveBrick[i][j].getShape());
             }
         }
         getChildren().add(conBrickController.getShape());
 
+        //鼠标操作方式
         setOnMouseMoved(e -> conBrickController.MouseMove(e));
 
+        //键盘操作方式
         setOnKeyPressed(e -> conBrickController.KeyMove(e));
 
-           addBall();
+        addBall();
         //Thread t1 = new Thread(ballController2);
-        Thread t = new Thread(conBrickController);
+//        Thread t = new Thread(conBrickController);
 
         //t1.start();
-        t.start();
-
-
+//        conBrickController.start();
     }
 
     //图形添加
-    public void addShape(){
+    public void addShape()
+    {
         int i = 0;
-        for(int j = 0; j < 6; j ++){
+        for (int j = 0; j < 6; j++)
+        {
             getChildren().add(saveBrick[i][j].getShape());
         }
     }
 
-    public void deleteBall(BallController ballController){
-        try{
+    public void deleteBall(BallController ballController)
+    {
+        try
+        {
             int num = ballController.getNum();
             ballNum[num] = false;
             System.out.println("当前线程stop:" + ballThread[num].currentThread());
@@ -83,35 +86,38 @@ public class GamePane extends Pane {
 //                ballControllers[num] = null;
 //                return;
 //            }
-        }catch ( Exception e){
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
 
-    public boolean addBall(){
+    public boolean addBall()
+    {
 
         boolean flag = false;
         Brick conBrick = this.conBrickController.getShape();
 
-        for(int i = 0; i < 3; i++){
-            if(!ballNum[i]){
+        for (int i = 0; i < 3; i++)
+        {
+            if (!ballNum[i])
+            {
                 int num = i;
-                Ball ball = new Ball( (conBrick.getX() + Math.random() * conBrick.getWidth()),
-                        conBrick.getY(),20, Color.CORNFLOWERBLUE);
+                Ball ball = new Ball((conBrick.getX() + Math.random() * conBrick.getWidth()),
+                        conBrick.getY(), 20, Color.CORNFLOWERBLUE);
 
                 ballNum[num] = true;
-                ballControllers[num] = new BallController(ball ,this , num);
+                ballControllers[num] = new BallController(ball, this, num);
 
-                double dx,dy;
+                double dx, dy;
                 dx = Math.random() * 0.6;
                 dy = 0.6 - dx;
                 ballControllers[num].setDx(dx);
                 ballControllers[num].setDy(dy);
 
                 getChildren().add(ballControllers[num].getShape());
-
-                ballThread[num] = new Thread(ballControllers[num]);
-                ballThread[num].start();
+//                ballThread[num] = new Thread(ballControllers[num]);
+                ballControllers[num].start();
 
                 flag = true;
 
@@ -124,33 +130,42 @@ public class GamePane extends Pane {
 
     /**
      * 调用砖块碰撞判断
+     *
      * @param ball 球
      * @return
      */
-    public int brickCatch(Ball ball){
-        int flag =  CreateBrick.isBrick(ball, saveBrick, this);
+    public int brickCatch(Ball ball)
+    {
+        int flag = CreateBrick.isBrick(ball, saveBrick, this);
         return flag;
     }
 
     /**
-     *  界面删除砖块
+     * 界面删除砖块
+     *
      * @param flag i = flag / 10 j = flag % 10
      */
-    public void deleteBrickShape( int flag){
+    public void deleteBrickShape(int flag)
+    {
         getChildren().remove(saveBrick[flag / 10][flag % 10]);
     }
-    public void de(){
-        for(int i = 0 ; i < 3 ; i ++){
-            if(ballNum[i]){
-                if(!ballControllers[i].isBallLive())
-                  deleteBall(ballControllers[i]);
+
+    public void de()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (ballNum[i])
+            {
+                if (!ballControllers[i].isBallLive())
+                {
+                    deleteBall(ballControllers[i]);
+                }
             }
         }
     }
 
-    public ConBrickController getConBrickController() {
+    public ConBrickController getConBrickController()
+    {
         return conBrickController;
     }
-
-
 }

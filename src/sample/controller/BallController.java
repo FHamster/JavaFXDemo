@@ -1,27 +1,24 @@
-package sample.Controller;
+package sample.controller;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-import sample.GameObjectView.Ball;
-import sample.GameObjectView.Brick;
+import sample.gameObjectView.Ball;
+import sample.gameObjectView.Brick;
 import sample.GamePane;
 import sample.myUtil.Discalculation;
 
 /**
  * ball的控制类
  * 操作ball
- * @author gaoxin
  */
 public class BallController extends AbstractController
 {
     //目标控制对象
     private  Ball ball;
     private  int num;
-    //
+    //小球速度 存活
     private double dx;
     private double dy;
     private boolean alive;
@@ -145,11 +142,23 @@ public class BallController extends AbstractController
             return true;
         }
     }
+
+    /**
+     * 小球因为出界消失的方法
+     */
     public void ballFade()
     {
-        getAnimation().play();
+        getAnimation().stop();
+        FadeTransition fade = new FadeTransition(Duration.millis(1000), ball);
+        fade.setFromValue(1.0);
+        fade.setToValue(0.0);
+        fade.setCycleCount(2);
+        fade.play();
     }
 
+    /**
+     * 小球移动的方法
+     */
     public void move()
     {
         isBound();
@@ -157,15 +166,18 @@ public class BallController extends AbstractController
         int flag = getPane().brickCatch(ball);
         disChange(flag);
         getPane().de();
+
         ball.setCenterX(ball.getCenterX() + dx);
         ball.setCenterY(ball.getCenterY() + dy);
     }
 
 
+    /**
+     * 小球移动开始
+     */
     @Override
-    public void run()
+    public void start()
     {
         getAnimation().play();
-
     }
 }

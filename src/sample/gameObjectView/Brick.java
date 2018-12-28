@@ -1,9 +1,8 @@
-package sample.GameObjectView;
+package sample.gameObjectView;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import sample.myUtil.MyUtil;
 
 

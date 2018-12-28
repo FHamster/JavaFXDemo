@@ -1,14 +1,8 @@
 package sample.myUtil;
 
 
-import javafx.scene.layout.Pane;
-import javafx.scene.shape.Line;
-import sample.Controller.BrickController;
-import sample.GameObjectView.Ball;
-import sample.GameObjectView.Brick;
-import sample.GamePane;
-
-import java.util.List;
+import sample.controller.BrickController;
+import sample.gameObjectView.Ball;
 
 public class DeleteBrick
 {

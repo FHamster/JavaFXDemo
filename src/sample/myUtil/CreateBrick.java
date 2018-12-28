@@ -1,8 +1,8 @@
 package sample.myUtil;
 
-import sample.Controller.BrickController;
-import sample.GameObjectView.Ball;
-import sample.GameObjectView.Brick;
+import sample.controller.BrickController;
+import sample.gameObjectView.Ball;
+import sample.gameObjectView.Brick;
 import sample.GamePane;
 
 public class CreateBrick {
