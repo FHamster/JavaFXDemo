@@ -53,7 +53,7 @@ public class TimerController
         return view;
     }
 
-//    public static int currentSec() {
-//        return bean.getMin() * 60 + bean.getSec();
-//    }
+    public  int currentSec() {
+        return bean.getMin() * 60 + bean.getSec();
+    }
 }

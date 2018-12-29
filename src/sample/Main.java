@@ -14,7 +14,7 @@ public class Main extends Application
         primaryStage.setTitle("Brick Breaker");
         RootPane rootPane = new RootPane();
 
-        primaryStage.setScene(new Scene(rootPane, 600, 800));
+        primaryStage.setScene(new Scene(rootPane, 800, 800));
         primaryStage.show();
 
         rootPane.getGamePane().requestFocus();

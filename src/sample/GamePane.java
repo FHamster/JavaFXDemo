@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.beans.property.*;
+
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -14,6 +16,9 @@ import sample.myUtil.CreateBrick;
 
 public class GamePane extends Pane
 {
+
+    //父面版
+    RootPane ParentPane;
     ConBrickController conBrickController;
     //    List<BrickController> list;
     boolean[] ballNum = new boolean[5];
@@ -21,8 +26,16 @@ public class GamePane extends Pane
 
     BallController[] ballControllers = new BallController[5];
 
-    public GamePane()
+    public RootPane getParentPane()
     {
+        return ParentPane;
+    }
+
+    public GamePane(RootPane rootPane)
+    {
+        //父面版
+        ParentPane = rootPane;
+
         //尺寸设置
         setMinSize(600, 800);
         setMaxSize(600, 800);
@@ -30,6 +43,7 @@ public class GamePane extends Pane
         //背景设置
         Image image = new Image(getClass().getResourceAsStream("../img/background.png"));
         setBackground(new Background(new BackgroundImage(image, null, null, null, null)));
+
 
         Brick brick2 = Brick.getConBrick();
         conBrickController = new ConBrickController(brick2, this);
@@ -50,6 +64,7 @@ public class GamePane extends Pane
         setOnKeyPressed(e -> conBrickController.KeyMove(e));
 
         addBall();
+
         //Thread t1 = new Thread(ballController2);
 //        Thread t = new Thread(conBrickController);
 
@@ -78,9 +93,10 @@ public class GamePane extends Pane
             ballNum[num] = false;
             ballController.ballFade();
             getChildren().remove(ballControllers[num]);
-            if(calculatinBall() <= 0){
+            if (calculatinBall() <= 0)
+            {
                 addBall();
-                addShape();
+//                addShape();
             }
         } catch (Exception e)
         {
@@ -88,11 +104,15 @@ public class GamePane extends Pane
         }
     }
 
-    public int calculatinBall(){
+    public int calculatinBall()
+    {
         int num = 0;
-        for(int i = 0; i < 3; i ++){
-            if(ballNum[i])
-                num ++;
+        for (int i = 0; i < 3; i++)
+        {
+            if (ballNum[i])
+            {
+                num++;
+            }
         }
         return num;
     }
@@ -152,6 +172,7 @@ public class GamePane extends Pane
      */
     public void deleteBrickShape(int flag)
     {
+
         getChildren().remove(saveBrick[flag / 10][flag % 10]);
     }
 
