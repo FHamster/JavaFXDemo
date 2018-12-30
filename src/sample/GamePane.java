@@ -10,6 +10,7 @@ import sample.gameObjectView.Ball;
 import sample.gameObjectView.Brick;
 import sample.infoPane.controller.TimerController;
 import sample.myUtil.CreateBrick;
+import sample.myUtil.CreateProps;
 
 
 public class GamePane extends Pane
@@ -56,6 +57,8 @@ public class GamePane extends Pane
         //t1.start();
 //        conBrickController.start();
 
+
+
     }
 
 
@@ -70,6 +73,10 @@ public class GamePane extends Pane
         }
     }
 
+    /**
+     * 删除球 num代表数组编号
+     * @param ballController
+     */
     public void deleteBall(BallController ballController)
     {
         try
@@ -81,6 +88,11 @@ public class GamePane extends Pane
             if(calculatinBall() <= 0){
                 addBall();
                 addShape();
+
+                PropsController test = CreateProps.cratePropController(this);
+                test.start();
+                getChildren().add(test.getShape());
+
             }
         } catch (Exception e)
         {
@@ -115,8 +127,8 @@ public class GamePane extends Pane
                 ballControllers[num] = new BallController(ball, this, num);
 
                 double dx, dy;
-                dx = Math.random() * 0.6;
-                dy = 0.6 - dx;
+                dx = Math.random() * 0.5;
+                dy = 0.6 - dx + 0.1;
                 ballControllers[num].setDx(dx);
                 ballControllers[num].setDy(dy);
 
@@ -155,7 +167,7 @@ public class GamePane extends Pane
         getChildren().remove(saveBrick[flag / 10][flag % 10]);
     }
 
-    public void de()
+    public void ballDelete()
     {
         for (int i = 0; i < 3; i++)
         {
@@ -167,6 +179,23 @@ public class GamePane extends Pane
                 }
             }
         }
+    }
+
+    /**
+     * 增加道具球
+     */
+    public  void propsAddBall(){
+        for(int i = 0; i <  2; i++)
+           addBall();
+    }
+
+    /**
+     * delete道具球动画
+     * @param propsController
+     */
+    public void  deletePropsBall(PropsController propsController){
+        propsController.ballFade();
+        getChildren().remove(propsController);
     }
 
     public ConBrickController getConBrickController()

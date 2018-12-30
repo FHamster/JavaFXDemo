@@ -35,6 +35,10 @@ public class BallController extends AbstractController
         dy = 0.3;
     }
 
+    public BallController(GamePane pane) {
+        super(pane,null);
+    }
+
     public int getNum() {
         return num;
     }
@@ -61,15 +65,14 @@ public class BallController extends AbstractController
         double y = ball.getCenterY();
         double radius = ball.getRadius();
         Pane pane = this.getPane();
-        Brick conBrick = getPane().getConBrickController().getShape();
 
         boolean flag = false;
         // Check boundaries
-        if (x < radius || x > pane.getWidth() - radius)
+        if (x < radius|| x > pane.getWidth() - radius)
         {
             dx *= -1; // Change ball move direction
             flag = true;
-        } else if (y < radius || y > pane.getHeight() - radius)
+        } else if (y < -radius )
         {
             dy *= -1; // Change ball move direction
             flag = true;
@@ -82,7 +85,7 @@ public class BallController extends AbstractController
      * 挡板碰撞判定
      * @return
      */
-    boolean isconBrick (){
+    private boolean isconBrick (){
         Brick conBrick = getPane().getConBrickController().getShape();
 
         boolean flag = false;
@@ -165,7 +168,7 @@ public class BallController extends AbstractController
         isconBrick();
         int flag = getPane().brickCatch(ball);
         disChange(flag);
-        getPane().de();
+        getPane().ballDelete();
 
         ball.setCenterX(ball.getCenterX() + dx);
         ball.setCenterY(ball.getCenterY() + dy);
