@@ -1,6 +1,7 @@
 package sample.controller;
 
 import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.layout.Pane;
@@ -78,7 +79,18 @@ public class PropsController extends BallController {
 
         return flag;
     }
-
+    /**
+     * 小球因为出界消失的方法
+     */
+    public void ballFade()
+    {
+        getAnimation().stop();
+        FadeTransition fade = new FadeTransition(Duration.millis(1000), ball);
+        fade.setFromValue(1.0);
+        fade.setToValue(0.0);
+        fade.setCycleCount(2);
+        fade.play();
+    }
     /**
      * 判断出界
      * @return

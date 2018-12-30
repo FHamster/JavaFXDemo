@@ -24,7 +24,7 @@ public class GamePane extends Pane
 
     BallController[] ballControllers = new BallController[5];
 
-    public GamePane()
+    public GamePane(RootPane rootPane)
     {
         //尺寸设置
         setMinSize(600, 800);
