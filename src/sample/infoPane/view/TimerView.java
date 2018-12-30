@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class TimerView extends Label
+public class TimerView extends Text
 {
     private IntegerProperty min = new SimpleIntegerProperty(0);
     private IntegerProperty sec = new SimpleIntegerProperty(0);
@@ -18,8 +18,10 @@ public class TimerView extends Label
         min.bindBidirectional(BeanMin);
         sec.bindBidirectional(BeanSec);
 
-        setTextFill(Color.FORESTGREEN);
+        setFill(Color.FORESTGREEN);
         setFont(new Font(50));
+        setStroke(Color.WHITE);
+
         repaint();
     }
 

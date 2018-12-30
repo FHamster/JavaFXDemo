@@ -30,9 +30,6 @@ public class BallController extends AbstractController
         this.ball = ball;
         this.num = num;
         getAnimation().setCycleCount(Animation.INDEFINITE);
-
-        dx = 0.3;
-        dy = 0.3;
     }
 
     public BallController(GamePane pane) {

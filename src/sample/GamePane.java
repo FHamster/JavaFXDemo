@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.beans.property.*;
+
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -57,8 +59,6 @@ public class GamePane extends Pane
         //t1.start();
 //        conBrickController.start();
 
-
-
     }
 
 
@@ -100,11 +100,15 @@ public class GamePane extends Pane
         }
     }
 
-    public int calculatinBall(){
+    public int calculatinBall()
+    {
         int num = 0;
-        for(int i = 0; i < 3; i ++){
-            if(ballNum[i])
-                num ++;
+        for (int i = 0; i < 3; i++)
+        {
+            if (ballNum[i])
+            {
+                num++;
+            }
         }
         return num;
     }

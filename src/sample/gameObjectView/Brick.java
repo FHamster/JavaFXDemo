@@ -68,6 +68,8 @@ public class Brick extends Rectangle
         super.setFill(paint);
         super.setArcHeight(arcHeight);
         super.setArcWidth(arcWidth);
+        super.setStroke(Color.GRAY);
+
     }
 
 
