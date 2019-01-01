@@ -47,7 +47,7 @@ public class PropsController extends BallController {
                 getPane().propsAddBall();
                 break;
             case 2:{
-                if(conBrick.getWidth() >= 175)
+                if(conBrick.getWidth() >= 200)
                     break;
                 else{
                     conBrick.setWidth(conBrick.getWidth() + 25);
@@ -55,7 +55,7 @@ public class PropsController extends BallController {
                 }
             }
             case 3:{
-                if(conBrick.getWidth() <= 255)
+                if(conBrick.getWidth() <= 25)
                     break;
                 else{
                     conBrick.setWidth(conBrick.getWidth() - 25);

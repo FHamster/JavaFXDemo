@@ -14,6 +14,8 @@ import sample.infoPane.controller.TimerController;
 import sample.myUtil.CreateBrick;
 import sample.myUtil.CreateProps;
 
+import javax.lang.model.element.NestingKind;
+
 
 public class GamePane extends Pane
 {
@@ -206,4 +208,5 @@ public class GamePane extends Pane
     {
         return conBrickController;
     }
+
 }
