@@ -21,7 +21,7 @@ public class CreateProps {
     public static PropsBall createPropsBall(GamePane pane){
         double weight = pane.getWidth() - 60;
         int num = (int)(Math.random() * 4) + 1;
-        return new PropsBall(Math.random() * weight, 0, 15,  Color.rgb(255, 0, 0), num );
+        return new PropsBall(30 + Math.random() * 540, 0, 15,  Color.rgb(255, 0, 0), num );
     }
 
     public static PropsController cratePropController(GamePane pane){

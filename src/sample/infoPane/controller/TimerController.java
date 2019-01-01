@@ -5,8 +5,10 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import sample.GamePane;
+import sample.controller.PropsController;
 import sample.infoPane.bean.TimerBean;
 import sample.infoPane.view.TimerView;
+import sample.myUtil.CreateProps;
 
 /**
  * 计时器的控制器
@@ -37,7 +39,13 @@ public class TimerController
         if (bean.getSec() % 10 == 0)
         {
             pane.addShape();
+
+            PropsController test = CreateProps.cratePropController(pane);
+            test.start();
+            pane.getChildren().add(test.getView());
         }
+
+
     }
 
 

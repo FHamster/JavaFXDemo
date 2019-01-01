@@ -4,6 +4,9 @@ import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
@@ -43,8 +46,12 @@ public class PropsController extends BallController
 
         //绑定view和ball坐标
         //注意这里image的坐标由左上角表示，ball坐标由中心表示
-        view.xProperty().bindBidirectional(ball.centerXProperty());
-        view.yProperty().bindBidirectional(ball.centerYProperty());
+
+//        DoubleBinding add =
+        view.xProperty().bind(ball.centerXProperty().subtract(ball.radiusProperty()));
+        view.yProperty().bind(ball.centerYProperty().subtract(ball.radiusProperty()));
+        view.opacityProperty().bind(ball.opacityProperty());
+
         //view.prop;
 
         getAnimation().setCycleCount(Animation.INDEFINITE);

@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.beans.property.*;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -90,11 +89,6 @@ public class GamePane extends Pane
             if(calculatinBall() <= 0){
                 addBall();
                 addShape();
-
-                PropsController test = CreateProps.cratePropController(this);
-                test.start();
-                getChildren().add(test.getShape());
-
             }
         } catch (Exception e)
         {

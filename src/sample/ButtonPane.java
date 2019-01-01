@@ -3,9 +3,9 @@ package sample;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 
-public class InfoPane extends VBox
+public class ButtonPane extends VBox
 {
-    public InfoPane(Node... children)
+    public ButtonPane(Node... children)
     {
         super(children);
     }
