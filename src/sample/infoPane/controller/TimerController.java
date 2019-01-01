@@ -4,6 +4,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+import sample.GamePane;
 import sample.infoPane.bean.TimerBean;
 import sample.infoPane.view.TimerView;
 
@@ -14,12 +15,14 @@ import sample.infoPane.view.TimerView;
  */
 public class TimerController
 {
+    private GamePane pane;
     private TimerBean bean;
     private TimerView view;
     private Animation animation;
 
-    public TimerController()
+    public TimerController(GamePane pane)
     {
+        this.pane = pane;
         bean = new TimerBean();
         view = new TimerView(bean.minProperty(), bean.secProperty());
         animation = new Timeline(new KeyFrame(Duration.seconds(1), e -> Timing()));
@@ -30,6 +33,11 @@ public class TimerController
     {
         bean.addSec(1);
         view.repaint();
+
+        if (bean.getSec() % 10 == 0)
+        {
+            pane.addShape();
+        }
     }
 
 
