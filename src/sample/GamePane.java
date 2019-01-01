@@ -12,13 +12,13 @@ import sample.gameObjectView.Ball;
 import sample.gameObjectView.Brick;
 import sample.infoPane.controller.TimerController;
 import sample.myUtil.CreateBrick;
+import sample.myUtil.CreateProps;
+
+import javax.lang.model.element.NestingKind;
 
 
 public class GamePane extends Pane
 {
-
-    //父面版
-    RootPane ParentPane;
     ConBrickController conBrickController;
     //    List<BrickController> list;
     boolean[] ballNum = new boolean[5];
@@ -26,16 +26,8 @@ public class GamePane extends Pane
 
     BallController[] ballControllers = new BallController[5];
 
-    public RootPane getParentPane()
-    {
-        return ParentPane;
-    }
-
     public GamePane(RootPane rootPane)
     {
-        //父面版
-        ParentPane = rootPane;
-
         //尺寸设置
         setMinSize(600, 800);
         setMaxSize(600, 800);
@@ -43,7 +35,6 @@ public class GamePane extends Pane
         //背景设置
         Image image = new Image(getClass().getResourceAsStream("../img/background.png"));
         setBackground(new Background(new BackgroundImage(image, null, null, null, null)));
-
 
         Brick brick2 = Brick.getConBrick();
         conBrickController = new ConBrickController(brick2, this);
@@ -64,7 +55,6 @@ public class GamePane extends Pane
         setOnKeyPressed(e -> conBrickController.KeyMove(e));
 
         addBall();
-
         //Thread t1 = new Thread(ballController2);
 //        Thread t = new Thread(conBrickController);
 
@@ -85,6 +75,10 @@ public class GamePane extends Pane
         }
     }
 
+    /**
+     * 删除球 num代表数组编号
+     * @param ballController
+     */
     public void deleteBall(BallController ballController)
     {
         try
@@ -93,10 +87,14 @@ public class GamePane extends Pane
             ballNum[num] = false;
             ballController.ballFade();
             getChildren().remove(ballControllers[num]);
-            if (calculatinBall() <= 0)
-            {
+            if(calculatinBall() <= 0){
                 addBall();
-//                addShape();
+                addShape();
+
+                PropsController test = CreateProps.cratePropController(this);
+                test.start();
+                getChildren().add(test.getShape());
+
             }
         } catch (Exception e)
         {
@@ -135,8 +133,8 @@ public class GamePane extends Pane
                 ballControllers[num] = new BallController(ball, this, num);
 
                 double dx, dy;
-                dx = Math.random() * 0.6;
-                dy = 0.6 - dx;
+                dx = Math.random() * 0.5;
+                dy = 0.6 - dx + 0.1;
                 ballControllers[num].setDx(dx);
                 ballControllers[num].setDy(dy);
 
@@ -172,11 +170,10 @@ public class GamePane extends Pane
      */
     public void deleteBrickShape(int flag)
     {
-
         getChildren().remove(saveBrick[flag / 10][flag % 10]);
     }
 
-    public void de()
+    public void ballDelete()
     {
         for (int i = 0; i < 3; i++)
         {
@@ -190,8 +187,26 @@ public class GamePane extends Pane
         }
     }
 
+    /**
+     * 增加道具球
+     */
+    public  void propsAddBall(){
+        for(int i = 0; i <  2; i++)
+           addBall();
+    }
+
+    /**
+     * delete道具球动画
+     * @param propsController
+     */
+    public void  deletePropsBall(PropsController propsController){
+        propsController.ballFade();
+        getChildren().remove(propsController);
+    }
+
     public ConBrickController getConBrickController()
     {
         return conBrickController;
     }
+
 }

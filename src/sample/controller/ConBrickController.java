@@ -2,6 +2,7 @@ package sample.controller;
 
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import jdk.nashorn.internal.ir.ContinueNode;
 import sample.gameObjectView.Brick;
 import sample.GamePane;
 
@@ -13,6 +14,7 @@ public class ConBrickController extends AbstractController
 {
     //目标控制对象
     private Brick brick;
+    private MouseEvent last;
 
     public ConBrickController(Brick brick, GamePane pane)
     {
@@ -34,10 +36,17 @@ public class ConBrickController extends AbstractController
 
     /**
      * 基于鼠标的砖块移动方法
+     * 触碰边界必须反向移动
      */
     public void MouseMove(MouseEvent e)
     {
-        brick.setX(e.getX() - brick.getWidth() / 2);
+        if(last == null)
+            last = e;
+        if((brick.getX() > 30 || e.getX() - last.getX() > 0) && (brick.getX() + brick.getWidth() < getPane().getWidth() - 30 || e.getX() - last.getX() < 0)){
+            brick.setX(e.getX() - brick.getWidth() / 2);
+            last = e;
+        }
+
 
     }
 

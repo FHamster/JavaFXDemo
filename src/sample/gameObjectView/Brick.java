@@ -27,7 +27,7 @@ public class Brick extends Rectangle
 
 
     //控制挡板的长宽
-    private static final int ConBrickWidth = 100;
+    private static final int ConBrickWidth = 125;
     private static final int ConBrickHeight = 20;
 
     /**
@@ -71,4 +71,6 @@ public class Brick extends Rectangle
         super.setStroke(Color.GRAY);
 
     }
+
+
 }
