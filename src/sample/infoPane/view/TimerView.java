@@ -15,8 +15,8 @@ public class TimerView extends Text
 
     public TimerView(IntegerProperty BeanMin, IntegerProperty BeanSec)
     {
-        min.bindBidirectional(BeanMin);
-        sec.bindBidirectional(BeanSec);
+        min.bind(BeanMin);
+        sec.bind(BeanSec);
 
         setFill(Color.FORESTGREEN);
         setFont(new Font(50));

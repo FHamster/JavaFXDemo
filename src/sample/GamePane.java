@@ -22,7 +22,7 @@ public class GamePane extends Pane
     //    List<BrickController> list;
     boolean[] ballNum = new boolean[5];
     BrickController[][] saveBrick;
-
+    RootPane rootPane;
     BallController[] ballControllers = new BallController[5];
 
     public GamePane(RootPane rootPane)
@@ -35,6 +35,7 @@ public class GamePane extends Pane
         Image image = new Image(getClass().getResourceAsStream("../img/background.png"));
         setBackground(new Background(new BackgroundImage(image, null, null, null, null)));
 
+        this.rootPane = rootPane;
         Brick brick2 = Brick.getConBrick();
         conBrickController = new ConBrickController(brick2, this);
         saveBrick = CreateBrick.createBrick(this);
@@ -165,6 +166,9 @@ public class GamePane extends Pane
     public void deleteBrickShape(int flag)
     {
         getChildren().remove(saveBrick[flag / 10][flag % 10]);
+        //测试积分器
+        rootPane.pointController.addPoint(10);
+        /*=-=====*/
     }
 
     public void ballDelete()

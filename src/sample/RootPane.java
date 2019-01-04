@@ -3,6 +3,7 @@ package sample;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import sample.infoPane.controller.PointController;
 import sample.infoPane.controller.TimerController;
 
 public class RootPane extends BorderPane
@@ -13,6 +14,7 @@ public class RootPane extends BorderPane
 
     //控制器
     TimerController timerController = new TimerController(gamePane);
+    PointController pointController = new PointController(gamePane);
 
     //按键
     Button startButton = new Button("开始");
@@ -70,6 +72,7 @@ public class RootPane extends BorderPane
     public void IniInfoPane()
     {
         infoPane.getChildren().add(timerController.getView());
+        infoPane.getChildren().add(pointController.getView());
         timerController.startTimer();
     }
 

@@ -46,6 +46,7 @@ public class PropsController extends BallController
 
         //绑定view和ball坐标
         //注意这里image的坐标由左上角表示，ball坐标由中心表示
+        //哦透明度我也绑了
 
 //        DoubleBinding add =
         view.xProperty().bind(ball.centerXProperty().subtract(ball.radiusProperty()));

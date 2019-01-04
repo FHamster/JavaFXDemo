@@ -1,9 +1,5 @@
 package sample.myUtil;
 
-import com.sun.deploy.util.BlackList;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelReader;
 import javafx.scene.paint.Color;
 import sample.GamePane;
 import sample.controller.PropsController;
@@ -21,7 +17,7 @@ public class CreateProps {
     public static PropsBall createPropsBall(GamePane pane){
         double weight = pane.getWidth() - 60;
         int num = (int)(Math.random() * 4) + 1;
-        return new PropsBall(30 + Math.random() * 540, 0, 15,  Color.rgb(255, 0, 0), num );
+        return new PropsBall(30 + Math.random() * 540, 0, 15, Color.RED, num);
     }
 
     public static PropsController cratePropController(GamePane pane){

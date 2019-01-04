@@ -12,6 +12,4 @@ public class ImageLoader
     public static Image addCon = new Image("img/add.png");
     public static Image delCon = new Image("img/delete.png");
     public static Image shadow = new Image("img/shadowball.png");
-
-
 }

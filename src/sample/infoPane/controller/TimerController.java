@@ -14,6 +14,7 @@ import sample.myUtil.CreateProps;
  * 计时器的控制器
  * 已经开放了开始计时、暂停、重置接口
  * 使用的时候只需要制造控制器对象
+ * 指定视图对象的位置
  */
 public class TimerController
 {
@@ -31,9 +32,21 @@ public class TimerController
         animation.setCycleCount(Animation.INDEFINITE);
     }
 
+
+    public void addSec(int addSec)
+    {
+//        System.out.println(1);
+        bean.setSec(bean.getSec() + addSec);
+        if (bean.getSec() >= 60)
+        {
+            bean.setSec(bean.getSec() - 60);
+            bean.setMin(bean.getMin() + 1);
+        }
+    }
+
     private void Timing()
     {
-        bean.addSec(1);
+        addSec(1);
         view.repaint();
 
         if (bean.getSec() % 10 == 0)
@@ -55,21 +68,24 @@ public class TimerController
         bean.setMin(0);
         bean.setSec(0);
     }
+
     public void pauseTimer()
     {
         animation.pause();
     }
+
     public void startTimer()
     {
         animation.play();
     }
 
+    public int currentSec()
+    {
+        return bean.getMin() * 60 + bean.getSec();
+    }
+
     public TimerView getView()
     {
         return view;
-    }
-
-    public  int currentSec() {
-        return bean.getMin() * 60 + bean.getSec();
     }
 }

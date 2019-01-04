@@ -19,16 +19,7 @@ public class TimerBean
         setSec(sec);
     }
 
-    public void addSec(int addSec)
-    {
-//        System.out.println(1);
-        setSec(getSec() + addSec);
-        if (getSec() >= 60)
-        {
-            setSec(getSec() - 60);
-            setMin(getMin() + 1);
-        }
-    }
+
 
     //getter and setter
     /*=================================================================================*/
