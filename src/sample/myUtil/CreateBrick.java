@@ -107,4 +107,20 @@ public class CreateBrick {
             pane.deleteBrickShape(flag);
         return  disController;
     }
+
+    //判断砖块是否出界，结束游戏
+    public boolean boundBrick(BrickController[][] save){
+
+        boolean flag = false;
+
+        for(int i = 0 ; i < 6; i ++)
+            if(save[18][i] == null)
+                continue;
+            else{
+                flag = true;
+                break;
+            }
+
+        return flag;
+    }
 }

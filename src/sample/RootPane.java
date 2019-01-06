@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.animation.Animation;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -19,7 +20,7 @@ public class RootPane extends BorderPane
     //按键
     Button startButton = new Button("开始");
     Button pauseButton = new Button("暂停");
-    Button stopButton = new Button("停止");
+//    Button stopButton = new Button("停止");
     Button restarButton = new Button("重玩");
 
     public RootPane()
@@ -45,18 +46,26 @@ public class RootPane extends BorderPane
         //TODO 按键事件指定
         startButton.setOnAction(e ->
         {
-
+            timerController.startTimer();
+            for(int i = 0 ; i < 3; i++){
+                if(gamePane.ballNum[i])
+                    gamePane.ballControllers[i].start();
+            }
         });
 
         pauseButton.setOnAction(e ->
         {
-
+            timerController.getAnimation().stop();
+            for(int i = 0 ; i < 3; i++){
+                if(gamePane.ballNum[i])
+                    gamePane.ballControllers[i].getAnimation().stop();
+            }
         });
 
-        stopButton.setOnAction(e ->
-        {
-
-        });
+//        stopButton.setOnAction(e ->
+//        {
+//
+//        });
 
         restarButton.setOnAction(e ->
         {
@@ -64,7 +73,7 @@ public class RootPane extends BorderPane
         });
         buttonPane.getChildren().add(startButton);
         buttonPane.getChildren().add(pauseButton);
-        buttonPane.getChildren().add(stopButton);
+//        buttonPane.getChildren().add(stopButton);
         buttonPane.getChildren().add(restarButton);
 
     }

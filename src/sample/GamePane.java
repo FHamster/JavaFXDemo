@@ -19,7 +19,7 @@ import javax.lang.model.element.NestingKind;
 public class GamePane extends Pane
 {
     ConBrickController conBrickController;
-    //    List<BrickController> list;
+
     boolean[] ballNum = new boolean[5];
     BrickController[][] saveBrick;
     RootPane rootPane;
@@ -192,12 +192,12 @@ public class GamePane extends Pane
         for(int i = 0; i <  2; i++)
            addBall();
     }
-
     /**
      * delete道具球动画
      * @param propsController
      */
     public void  deletePropsBall(PropsController propsController){
+
         propsController.ballFade();
         getChildren().remove(propsController);
     }

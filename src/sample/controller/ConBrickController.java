@@ -1,5 +1,6 @@
 package sample.controller;
 
+import javafx.animation.Animation;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import jdk.nashorn.internal.ir.ContinueNode;
@@ -30,7 +31,7 @@ public class ConBrickController extends AbstractController
     @Override
     public void start()
     {
-//        getAnimation().play();
+        getAnimation().play();
     }
     /*==================================================================================*/
 
@@ -74,5 +75,4 @@ public class ConBrickController extends AbstractController
     }
 
     /*==================================================================================*/
-
 }

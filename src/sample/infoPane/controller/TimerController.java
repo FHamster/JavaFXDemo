@@ -88,4 +88,8 @@ public class TimerController
     {
         return view;
     }
+
+    public Animation getAnimation() {
+        return animation;
+    }
 }
