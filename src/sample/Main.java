@@ -17,6 +17,7 @@ public class Main extends Application
         primaryStage.setScene(new Scene(rootPane, 900, 800));
         primaryStage.show();
 
+        rootPane.requestFocus();
         rootPane.gamePane.requestFocus();
 
     }

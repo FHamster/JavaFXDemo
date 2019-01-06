@@ -47,6 +47,7 @@ public class RootPane extends BorderPane
         startButton.setOnAction(e ->
         {
             timerController.startTimer();
+            gamePane.conBrickController.setMove(true);
             for(int i = 0 ; i < 3; i++){
                 if(gamePane.ballNum[i])
                     gamePane.ballControllers[i].start();
@@ -56,6 +57,7 @@ public class RootPane extends BorderPane
         pauseButton.setOnAction(e ->
         {
             timerController.getAnimation().stop();
+            gamePane.conBrickController.setMove(false);
             for(int i = 0 ; i < 3; i++){
                 if(gamePane.ballNum[i])
                     gamePane.ballControllers[i].getAnimation().stop();
@@ -69,6 +71,7 @@ public class RootPane extends BorderPane
 
         restarButton.setOnAction(e ->
         {
+            this.requestFocus();
 
         });
         buttonPane.getChildren().add(startButton);
