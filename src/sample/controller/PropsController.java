@@ -94,20 +94,22 @@ public class PropsController extends BallController
                 if (conBrick.getWidth() >= 175)
                 {
                     break;
-                } else
-                {
+                } else if(conBrick.getWidth() + 25 >= 175){
+                    conBrick.setWidth(175);
+                }else {
                     conBrick.setWidth(conBrick.getWidth() + 25);
                     break;
                 }
             }
             case 3:
             {
-                if (conBrick.getWidth() <= 255)
+                if (conBrick.getWidth() <= 25)
                 {
                     break;
-                } else
-                {
-                    conBrick.setWidth(conBrick.getWidth() - 25);
+                } else if(conBrick.getWidth() - 50 <= 25){
+                    conBrick.setWidth(25);
+                }else {
+                    conBrick.setWidth(conBrick.getWidth() - 50);
                     break;
                 }
             }

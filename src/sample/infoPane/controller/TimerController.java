@@ -67,6 +67,7 @@ public class TimerController
         animation.stop();
         bean.setMin(0);
         bean.setSec(0);
+        view.repaint();
     }
 
     public void pauseTimer()

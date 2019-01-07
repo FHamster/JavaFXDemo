@@ -77,6 +77,13 @@ public class RootPane extends BorderPane
 
         restarButton.setOnAction(e ->
         {
+            timerController.getAnimation().stop();
+            gamePane.conBrickController.setMove(false);
+            for(int i = 0 ; i < 3; i++){
+                if(gamePane.ballNum[i])
+                    gamePane.ballControllers[i].getAnimation().stop();
+            }
+
             gamePane.getChildren().clear();
             gamePane = null;
 
@@ -86,6 +93,7 @@ public class RootPane extends BorderPane
 
             gamePane.setReopen(true);
             pointController.setPoint(0);
+            timerController.resetTimer();
 
             gamePane.reopenGame();
         });
@@ -99,7 +107,7 @@ public class RootPane extends BorderPane
     {
         infoPane.getChildren().add(timerController.getView());
         infoPane.getChildren().add(pointController.getView());
-        timerController.startTimer();
+//        timerController.startTimer();
     }
 
     public  void labelPane(){
@@ -111,6 +119,10 @@ public class RootPane extends BorderPane
         gamePane.getChildren().add(label);
     }
 
+    public void startTimer()
+    {
+        timerController.startTimer();
+    }
     public void setGamePane(GamePane gamePane) {
         this.gamePane = gamePane;
     }

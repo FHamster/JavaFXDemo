@@ -103,7 +103,7 @@ public class BallController extends AbstractController
 
         boolean flag = false;
         // Check boundaries
-        if (Discalculation.disVC(ball, getPane().getConBrickController().getShape()) <= ball.getRadius())
+        if (Discalculation.disVC(ball, getPane().getConBrickController().getShape()) <= ball.getRadius() + 1)
         {
             if((ball.getCenterY() < conBrick.getY() || ball.getCenterY() >conBrick.getY() + conBrick.getHeight())){
                 dy *= -1;
@@ -190,7 +190,7 @@ public class BallController extends AbstractController
 
         if(firstBall){
             ball.setCenterX(conBrick.getX() + conBrick.getWidth() / 2);
-            ball.setCenterY(conBrick.getY() - ball.getRadius() - 1);
+            ball.setCenterY(conBrick.getY() - ball.getRadius() - 1.5);
         }
     }
 
@@ -200,6 +200,7 @@ public class BallController extends AbstractController
             dx = Math.random() * 0.5;
             dy = 0.6 - dx + 0.1;
             firstBall = false;
+            getPane().getRootPane().startTimer();
         }
     }
     /**

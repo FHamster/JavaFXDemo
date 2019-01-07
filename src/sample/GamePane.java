@@ -104,6 +104,7 @@ public class GamePane extends Pane
             ballController.ballFade();
             ballController.setDx(0);
             ballController.setDy(10);
+//            ballController.stopAnimation();
             getChildren().remove(ballControllers[num]);
             if(calculatinBall() <= 0){
                 addBall();
@@ -167,13 +168,7 @@ public class GamePane extends Pane
                 getChildren().add(ballControllers[num].getShape());
                 ballControllers[num].start();
 
-                this.setOnKeyPressed(e ->
-                {
-                    if (e.getCode() == KeyCode.SPACE)
-                    {
-                        ballControllers[num].KeyCilck(e);
-                    }
-                });
+                this.setOnKeyPressed(e -> ballControllers[num].KeyCilck(e));
 
                 flag = true;
 
@@ -267,5 +262,10 @@ public class GamePane extends Pane
 
     public void setReopen(boolean reopen) {
         this.reopen = reopen;
+    }
+
+    public RootPane getRootPane()
+    {
+        return rootPane;
     }
 }
