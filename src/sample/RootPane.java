@@ -2,10 +2,18 @@ package sample;
 
 import javafx.animation.Animation;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import sample.infoPane.controller.PointController;
 import sample.infoPane.controller.TimerController;
+
+import javax.swing.*;
+import javax.xml.soap.Text;
+import java.awt.peer.LabelPeer;
 
 public class RootPane extends BorderPane
 {
@@ -20,8 +28,9 @@ public class RootPane extends BorderPane
     //按键
     Button startButton = new Button("开始");
     Button pauseButton = new Button("暂停");
-//    Button stopButton = new Button("停止");
     Button restarButton = new Button("重玩");
+
+    Label label = new Label();
 
     public RootPane()
     {
@@ -29,6 +38,7 @@ public class RootPane extends BorderPane
         IniGamePane();
         IniInfoPane();
         IniButtonPane();
+      //  labelPane();
 
         //设置布局
         setCenter(gamePane);
@@ -64,10 +74,6 @@ public class RootPane extends BorderPane
             }
         });
 
-//        stopButton.setOnAction(e ->
-//        {
-//
-//        });
 
         restarButton.setOnAction(e ->
         {
@@ -79,12 +85,12 @@ public class RootPane extends BorderPane
             gamePane.requestFocus();
 
             gamePane.setReopen(true);
+            pointController.setPoint(0);
 
             gamePane.reopenGame();
         });
         buttonPane.getChildren().add(startButton);
         buttonPane.getChildren().add(pauseButton);
-//        buttonPane.getChildren().add(stopButton);
         buttonPane.getChildren().add(restarButton);
 
     }
@@ -94,6 +100,15 @@ public class RootPane extends BorderPane
         infoPane.getChildren().add(timerController.getView());
         infoPane.getChildren().add(pointController.getView());
         timerController.startTimer();
+    }
+
+    public  void labelPane(){
+        label.setLayoutX(200);
+        label.setLayoutY(250);
+        label.setText("GAME OVER  \n SCORE : " + pointController.getPoint());
+        label.setFont(Font.font ("Verdana", FontWeight.BOLD,50));
+        label.setTextFill(Color.DARKSEAGREEN);
+        gamePane.getChildren().add(label);
     }
 
     public void setGamePane(GamePane gamePane) {

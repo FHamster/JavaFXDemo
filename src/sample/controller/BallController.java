@@ -190,7 +190,7 @@ public class BallController extends AbstractController
 
         if(firstBall){
             ball.setCenterX(conBrick.getX() + conBrick.getWidth() / 2);
-            ball.setCenterY(conBrick.getY() - ball.getRadius());
+            ball.setCenterY(conBrick.getY() - ball.getRadius() - 1);
         }
     }
 

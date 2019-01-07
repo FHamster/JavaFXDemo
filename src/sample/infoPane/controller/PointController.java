@@ -42,4 +42,13 @@ public class PointController
     {
         return view;
     }
+
+    public void setPoint(int point) {
+        bean.setPoint(point);
+        view.repaint();
+    }
+
+    public  int getPoint(){
+        return (int)bean.getPoint();
+    }
 }

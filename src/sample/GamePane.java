@@ -250,9 +250,10 @@ public class GamePane extends Pane
             deleteConBrick();
             addConrBrick();
 
-            ballDelete();
+            for(int i = 0; i < 3; i++)
+                ballDelete();
             this.firstBall = true;
-            addBall();
+           // addBall();
 
             this.reopen = false;
         }

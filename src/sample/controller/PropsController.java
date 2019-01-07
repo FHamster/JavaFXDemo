@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 import sample.GamePane;
+import sample.RootPane;
 import sample.gameObjectView.Brick;
 import sample.myUtil.Discalculation;
 import sample.myUtil.ImageLoader;
@@ -112,7 +113,7 @@ public class PropsController extends BallController
             }
             case 4:
             {
-                //propsBoom()
+
             }
             default:
                 break;
