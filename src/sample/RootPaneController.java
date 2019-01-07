@@ -56,9 +56,12 @@ public class RootPaneController extends BorderPane implements Initializable
     public void restartButtonAction(ActionEvent event)
     {
         System.out.println("restartButtonAction");
-        gamePane.getChildren().removeAll();
+        gamePane.getChildren().clear();
         gamePane = null;
 
+        gamePane = new GamePane(this);
+        setCenter(gamePane);
+        gamePane.requestFocus();
 //        gamePane = new GamePane(this);
 
 //        gamePane.setReopen(true);

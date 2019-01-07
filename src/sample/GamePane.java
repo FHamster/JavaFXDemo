@@ -2,6 +2,7 @@ package sample;
 
 
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;
@@ -57,10 +58,11 @@ public class GamePane extends Pane
         addBall();
 
 
-
     }
+
     //初始化砖块
-    public void addBrick(){
+    public void addBrick()
+    {
         saveBrick = CreateBrick.createBrick(this);
         for (int i = 0; i < 6; i++)
         {
@@ -72,13 +74,15 @@ public class GamePane extends Pane
     }
 
     //添加挡板
-    public void addConrBrick(){
+    public void addConrBrick()
+    {
 
         Brick brick = Brick.getConBrick();
         conBrickController = new ConBrickController(brick, this);
         getChildren().add(conBrickController.getShape());
 
     }
+
     //图形添加
     public void addShape()
     {
@@ -92,6 +96,7 @@ public class GamePane extends Pane
 
     /**
      * 删除球 num代表数组编号
+     *
      * @param ballController
      */
     public void deleteBall(BallController ballController)
@@ -104,7 +109,8 @@ public class GamePane extends Pane
             ballController.setDx(0);
             ballController.setDy(10);
             getChildren().remove(ballControllers[num]);
-            if(calculatinBall() <= 0){
+            if (calculatinBall() <= 0)
+            {
                 addBall();
                 addShape();
             }
@@ -114,7 +120,8 @@ public class GamePane extends Pane
         }
     }
 
-    public void deleteConBrick(){
+    public void deleteConBrick()
+    {
         conBrickController.conBrickFade();
         getChildren().remove(conBrickController);
         conBrickController = null;
@@ -148,13 +155,14 @@ public class GamePane extends Pane
                         conBrick.getY(), 20, Color.CORNFLOWERBLUE);
 
                 ballNum[num] = true;
-                ballControllers[num] = new BallController(ball, this, num,firstBall);
+                ballControllers[num] = new BallController(ball, this, num, firstBall);
 
                 double dx, dy;
                 dx = Math.random() * 0.5;
                 dy = 0.6 - dx + 0.1;
 
-                if(firstBall){
+                if (firstBall)
+                {
                     dx = 0;
                     dy = 0;
                     firstBall = false;
@@ -166,8 +174,13 @@ public class GamePane extends Pane
                 getChildren().add(ballControllers[num].getShape());
                 ballControllers[num].start();
 
-                this.setOnKeyPressed(e -> ballControllers[num].KeyCilck(e));
-
+                this.setOnKeyPressed(e ->
+                {
+                    if (e.getCode() == KeyCode.SPACE)
+                    {
+                        ballControllers[num].KeyCilck(e);
+                    }
+                });
                 flag = true;
 
                 break;
@@ -219,22 +232,30 @@ public class GamePane extends Pane
     /**
      * 增加道具球
      */
-    public  void propsAddBall(){
-        for(int i = 0; i <  1; i++)
-           addBall();
+    public void propsAddBall()
+    {
+        for (int i = 0; i < 1; i++)
+        {
+            addBall();
+        }
     }
+
     /**
      * delete道具球动画
+     *
      * @param propsController
      */
-    public void  deletePropsBall(PropsController propsController){
+    public void deletePropsBall(PropsController propsController)
+    {
         propsController.ballFade();
         getChildren().remove(propsController);
     }
 
     //重置标记
-    public void reopenGame(){
-        if(this.reopen){
+    public void reopenGame()
+    {
+        if (this.reopen)
+        {
             DeleteBrick.myAllDelete(saveBrick);
             this.getChildren().removeAll(this);
             addBrick();
@@ -256,7 +277,8 @@ public class GamePane extends Pane
         return conBrickController;
     }
 
-    public void setReopen(boolean reopen) {
+    public void setReopen(boolean reopen)
+    {
         this.reopen = reopen;
     }
 }
