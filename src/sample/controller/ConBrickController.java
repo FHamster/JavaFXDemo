@@ -1,8 +1,10 @@
 package sample.controller;
 
 import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 import jdk.nashorn.internal.ir.ContinueNode;
 import sample.gameObjectView.Brick;
 import sample.GamePane;
@@ -68,6 +70,15 @@ public class ConBrickController extends AbstractController {
                 brick.setX(brick.getX() + 10);
                 break;
         }
+    }
+
+    public void conBrickFade()
+    {
+        FadeTransition fade = new FadeTransition(Duration.millis(1000), brick);
+        fade.setFromValue(1.0);
+        fade.setToValue(0.0);
+        fade.setCycleCount(2);
+        fade.play();
     }
 
     public void setMove(boolean move) {

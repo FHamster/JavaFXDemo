@@ -71,8 +71,8 @@ public class RootPane extends BorderPane
 
         restarButton.setOnAction(e ->
         {
-            this.requestFocus();
-
+            gamePane.setReopen(true);
+            gamePane.reopenGame();
         });
         buttonPane.getChildren().add(startButton);
         buttonPane.getChildren().add(pauseButton);
@@ -88,5 +88,7 @@ public class RootPane extends BorderPane
         timerController.startTimer();
     }
 
-
+    public void setGamePane(GamePane gamePane) {
+        this.gamePane = gamePane;
+    }
 }

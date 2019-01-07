@@ -1,6 +1,8 @@
 package sample.controller;
 
 import javafx.animation.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
@@ -8,6 +10,8 @@ import sample.gameObjectView.Ball;
 import sample.gameObjectView.Brick;
 import sample.GamePane;
 import sample.myUtil.Discalculation;
+
+import java.security.Key;
 
 /**
  * ball的控制类
@@ -23,12 +27,24 @@ public class BallController extends AbstractController
     private double dy;
     private boolean alive;
 
+    private boolean firstBall = false;
+
     public BallController(Ball ball, GamePane pane ,int num)
     {
         super(pane, null);
         super.setAnimation(new Timeline(new KeyFrame(Duration.millis(1), e -> move())));
         this.ball = ball;
         this.num = num;
+        getAnimation().setCycleCount(Animation.INDEFINITE);
+    }
+
+    public BallController(Ball ball, GamePane pane ,int num, boolean firstBall)
+    {
+        super(pane, null);
+        super.setAnimation(new Timeline(new KeyFrame(Duration.millis(1), e -> move())));
+        this.ball = ball;
+        this.num = num;
+        this.firstBall = firstBall;
         getAnimation().setCycleCount(Animation.INDEFINITE);
     }
 
@@ -161,6 +177,8 @@ public class BallController extends AbstractController
      */
     public void move()
     {
+        Brick conBrick = getPane().getConBrickController().getShape();
+
         isBound();
         isconBrick();
         int flag = getPane().brickCatch(ball);
@@ -169,9 +187,21 @@ public class BallController extends AbstractController
 
         ball.setCenterX(ball.getCenterX() + dx);
         ball.setCenterY(ball.getCenterY() + dy);
+
+        if(firstBall){
+            ball.setCenterX(conBrick.getX() + conBrick.getWidth() / 2);
+            ball.setCenterY(conBrick.getY() - ball.getRadius());
+        }
     }
 
 
+    public void KeyCilck(KeyEvent e) {
+        if(e.getCode() == KeyCode.SPACE && firstBall){
+            dx = Math.random() * 0.5;
+            dy = 0.6 - dx + 0.1;
+            firstBall = false;
+        }
+    }
     /**
      * 小球移动开始
      */

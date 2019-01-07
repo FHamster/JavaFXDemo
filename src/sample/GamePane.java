@@ -12,6 +12,7 @@ import sample.gameObjectView.Brick;
 import sample.infoPane.controller.TimerController;
 import sample.myUtil.CreateBrick;
 import sample.myUtil.CreateProps;
+import sample.myUtil.DeleteBrick;
 
 import javax.lang.model.element.NestingKind;
 
@@ -25,8 +26,13 @@ public class GamePane extends Pane
     RootPane rootPane;
     BallController[] ballControllers = new BallController[5];
 
+    private boolean reopen;
+    private boolean firstBall = true;
+
     public GamePane(RootPane rootPane)
     {
+        this.reopen = false;
+
         //尺寸设置
         setMinSize(600, 800);
         setMaxSize(600, 800);
@@ -36,8 +42,25 @@ public class GamePane extends Pane
         setBackground(new Background(new BackgroundImage(image, null, null, null, null)));
 
         this.rootPane = rootPane;
-        Brick brick2 = Brick.getConBrick();
-        conBrickController = new ConBrickController(brick2, this);
+
+
+        //鼠标操作方式
+        setOnMouseMoved(e -> conBrickController.MouseMove(e));
+
+        //键盘操作方式
+        setOnKeyPressed(e -> conBrickController.KeyMove(e));
+
+        addBrick();
+
+        addConrBrick();
+
+        addBall();
+
+
+
+    }
+    //初始化砖块
+    public void addBrick(){
         saveBrick = CreateBrick.createBrick(this);
         for (int i = 0; i < 6; i++)
         {
@@ -46,24 +69,16 @@ public class GamePane extends Pane
                 getChildren().add(saveBrick[i][j].getShape());
             }
         }
-        getChildren().add(conBrickController.getShape());
-
-        //鼠标操作方式
-        setOnMouseMoved(e -> conBrickController.MouseMove(e));
-
-        //键盘操作方式
-        setOnKeyPressed(e -> conBrickController.KeyMove(e));
-
-        addBall();
-        //Thread t1 = new Thread(ballController2);
-//        Thread t = new Thread(conBrickController);
-
-        //t1.start();
-//        conBrickController.start();
-
     }
 
+    //添加挡板
+    public void addConrBrick(){
 
+        Brick brick = Brick.getConBrick();
+        conBrickController = new ConBrickController(brick, this);
+        getChildren().add(conBrickController.getShape());
+
+    }
     //图形添加
     public void addShape()
     {
@@ -86,6 +101,8 @@ public class GamePane extends Pane
             int num = ballController.getNum();
             ballNum[num] = false;
             ballController.ballFade();
+            ballController.setDx(0);
+            ballController.setDy(10);
             getChildren().remove(ballControllers[num]);
             if(calculatinBall() <= 0){
                 addBall();
@@ -95,6 +112,12 @@ public class GamePane extends Pane
         {
             e.printStackTrace();
         }
+    }
+
+    public void deleteConBrick(){
+        conBrickController.conBrickFade();
+        getChildren().remove(conBrickController);
+        conBrickController = null;
     }
 
     public int calculatinBall()
@@ -125,17 +148,25 @@ public class GamePane extends Pane
                         conBrick.getY(), 20, Color.CORNFLOWERBLUE);
 
                 ballNum[num] = true;
-                ballControllers[num] = new BallController(ball, this, num);
+                ballControllers[num] = new BallController(ball, this, num,firstBall);
 
                 double dx, dy;
                 dx = Math.random() * 0.5;
                 dy = 0.6 - dx + 0.1;
+
+                if(firstBall){
+                    dx = 0;
+                    dy = 0;
+                    firstBall = false;
+                }
+
                 ballControllers[num].setDx(dx);
                 ballControllers[num].setDy(dy);
 
                 getChildren().add(ballControllers[num].getShape());
-//                ballThread[num] = new Thread(ballControllers[num]);
                 ballControllers[num].start();
+
+                this.setOnKeyPressed(e -> ballControllers[num].KeyCilck(e));
 
                 flag = true;
 
@@ -202,9 +233,31 @@ public class GamePane extends Pane
         getChildren().remove(propsController);
     }
 
+    //重置标记
+    public void reopenGame(){
+        if(this.reopen){
+            DeleteBrick.myAllDelete(saveBrick);
+            this.getChildren().removeAll(this);
+            addBrick();
+
+            deleteConBrick();
+            addConrBrick();
+
+            ballDelete();
+            this.firstBall = true;
+            addBall();
+
+            this.reopen = false;
+        }
+    }
+
+
     public ConBrickController getConBrickController()
     {
         return conBrickController;
     }
 
+    public void setReopen(boolean reopen) {
+        this.reopen = reopen;
+    }
 }
