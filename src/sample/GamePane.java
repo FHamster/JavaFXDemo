@@ -20,17 +20,17 @@ import javax.lang.model.element.NestingKind;
 public class GamePane extends Pane
 {
     ConBrickController conBrickController;
-
     boolean[] ballNum = new boolean[5];
     BrickController[][] saveBrick;
-    RootPane rootPane;
+    RootPaneController rootPane;
     BallController[] ballControllers = new BallController[5];
 
     private boolean reopen;
     private boolean firstBall = true;
 
-    public GamePane(RootPane rootPane)
+    public GamePane(RootPaneController rootPane)
     {
+
         this.reopen = false;
 
         //尺寸设置
@@ -220,7 +220,7 @@ public class GamePane extends Pane
      * 增加道具球
      */
     public  void propsAddBall(){
-        for(int i = 0; i <  2; i++)
+        for(int i = 0; i <  1; i++)
            addBall();
     }
     /**
@@ -228,7 +228,6 @@ public class GamePane extends Pane
      * @param propsController
      */
     public void  deletePropsBall(PropsController propsController){
-
         propsController.ballFade();
         getChildren().remove(propsController);
     }

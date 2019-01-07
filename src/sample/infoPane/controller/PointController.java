@@ -1,7 +1,9 @@
 package sample.infoPane.controller;
 
-import javafx.animation.Animation;
-import sample.GamePane;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.scene.text.Text;
+import sample.RootPaneController;
 import sample.infoPane.bean.PointBean;
 import sample.infoPane.view.PointView;
 
@@ -14,32 +16,39 @@ import sample.infoPane.view.PointView;
 
 public class PointController
 {
-    private GamePane pane;
+    private RootPaneController pane;
     private PointBean bean;
-    private PointView view;
+    private Text view;
+    private StringProperty PointStr = new SimpleStringProperty();
 //    private Animation animation;
 
-    public PointController(GamePane pane)
+    public PointController(RootPaneController pane)
     {
         this.pane = pane;
-        bean = new PointBean();
-        view = new PointView(bean.pointProperty());
+        this.bean = new PointBean();
+        this.view = new PointView(bean.pointProperty());
     }
 
     public void subtractPoint(int subtract)
     {
         bean.setPoint(bean.getPoint() - subtract);
-        view.repaint();
+        PointStr.set(String.format("Point:%d", bean.getPoint()));
     }
 
     public void addPoint(int add)
     {
         bean.setPoint(bean.getPoint() + add);
-        view.repaint();
+        PointStr.set(String.format("Point:%d", bean.getPoint()));
+        System.out.println(String.format("Point:%d", bean.getPoint()));
     }
 
-    public PointView getView()
+    public StringProperty pointStrProperty()
+    {
+        return PointStr;
+    }
+
+    /*    public PointView getView()
     {
         return view;
-    }
+    }*/
 }

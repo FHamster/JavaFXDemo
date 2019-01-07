@@ -1,6 +1,8 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -10,15 +12,16 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("../fxml/RootPane.fxml"));
+//        RootPane rootPane = new RootPane();
+        RootPaneController root = new RootPaneController();
+//        root.setext
         primaryStage.setTitle("Brick Breaker");
-        RootPane rootPane = new RootPane();
-
-        primaryStage.setScene(new Scene(rootPane, 900, 800));
+        primaryStage.setScene(new Scene(root, 900, 800));
         primaryStage.show();
 
-        rootPane.requestFocus();
-        rootPane.gamePane.requestFocus();
+//        root.requestFocus();
+        root.gamePane.requestFocus();
 
     }
 

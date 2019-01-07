@@ -3,8 +3,11 @@ package sample.infoPane.controller;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.util.Duration;
 import sample.GamePane;
+import sample.RootPaneController;
 import sample.controller.PropsController;
 import sample.infoPane.bean.TimerBean;
 import sample.infoPane.view.TimerView;
@@ -18,16 +21,23 @@ import sample.myUtil.CreateProps;
  */
 public class TimerController
 {
-    private GamePane pane;
+    private RootPaneController pane;
     private TimerBean bean;
-    private TimerView view;
+//    private TimerView view;
     private Animation animation;
 
-    public TimerController(GamePane pane)
+    private StringProperty TimerStr = new SimpleStringProperty();
+
+    public StringProperty timerStrProperty()
+    {
+        return TimerStr;
+    }
+
+    public TimerController(RootPaneController pane)
     {
         this.pane = pane;
         bean = new TimerBean();
-        view = new TimerView(bean.minProperty(), bean.secProperty());
+//        view = new TimerView(bean.minProperty(), bean.secProperty());
         animation = new Timeline(new KeyFrame(Duration.seconds(1), e -> Timing()));
         animation.setCycleCount(Animation.INDEFINITE);
     }
@@ -47,18 +57,16 @@ public class TimerController
     private void Timing()
     {
         addSec(1);
-        view.repaint();
-
+//        view.repaint();
+        timerStrProperty().set(String.format("%02d:%02d", bean.getMin(), bean.getSec()));
         if (bean.getSec() % 10 == 0)
         {
-            pane.addShape();
-
-            PropsController test = CreateProps.cratePropController(pane);
+            GamePane gamePane = pane.getGamePane();
+            gamePane.addShape();
+            PropsController test = CreateProps.cratePropController(gamePane);
             test.start();
             pane.getChildren().add(test.getView());
         }
-
-
     }
 
 
@@ -84,10 +92,10 @@ public class TimerController
         return bean.getMin() * 60 + bean.getSec();
     }
 
-    public TimerView getView()
-    {
-        return view;
-    }
+//    public TimerView getView()
+//    {
+//        return view;
+//    }
 
     public Animation getAnimation() {
         return animation;
