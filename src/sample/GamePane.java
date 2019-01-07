@@ -2,6 +2,7 @@ package sample;
 
 
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;
@@ -166,7 +167,13 @@ public class GamePane extends Pane
                 getChildren().add(ballControllers[num].getShape());
                 ballControllers[num].start();
 
-                this.setOnKeyPressed(e -> ballControllers[num].KeyCilck(e));
+                this.setOnKeyPressed(e ->
+                {
+                    if (e.getCode() == KeyCode.SPACE)
+                    {
+                        ballControllers[num].KeyCilck(e);
+                    }
+                });
 
                 flag = true;
 

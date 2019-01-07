@@ -31,7 +31,7 @@ public class ConBrickController extends AbstractController {
 
     @Override
     public void start() {
-        getAnimation().play();
+//        getAnimation().play();
     }
     /*==================================================================================*/
 

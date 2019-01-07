@@ -71,7 +71,15 @@ public class RootPane extends BorderPane
 
         restarButton.setOnAction(e ->
         {
+            gamePane.getChildren().clear();
+            gamePane = null;
+
+            gamePane = new GamePane(this);
+            setCenter(gamePane);
+            gamePane.requestFocus();
+
             gamePane.setReopen(true);
+
             gamePane.reopenGame();
         });
         buttonPane.getChildren().add(startButton);
