@@ -66,7 +66,10 @@ public class GamePane extends Pane
 
 
     }
-    //初始化砖块
+
+    /**
+     * 初始化砖块
+     */
     public void addBrick(){
         saveBrick = CreateBrick.createBrick(this);
         for (int i = 0; i < 18; i++)
@@ -79,7 +82,9 @@ public class GamePane extends Pane
         }
     }
 
-    //添加挡板
+    /**
+     * 添加挡板
+     */
     public void addConrBrick(){
 
         Brick brick = Brick.getConBrick();
@@ -88,14 +93,17 @@ public class GamePane extends Pane
 
     }
 
-    //图形添加
+    /**
+     * 图形添加
+     */
     public void addShape()
     {
         CreateBrick.addBrick(saveBrick, this);
         int i = 0;
         for (int j = 0; j < 6; j++)
         {
-            getChildren().add(saveBrick[i][j].getShape());
+            if(saveBrick[i][j] != null)
+                getChildren().add(saveBrick[i][j].getShape());
         }
 
         if(CreateBrick.boundBrick(saveBrick)){
@@ -265,7 +273,7 @@ public class GamePane extends Pane
     //重置标记
     public void reopenGame(){
         if(this.reopen){
-            DeleteBrick.myAllDelete(saveBrick);
+            DeleteBrick.myAllDelete(saveBrick,this);
             this.getChildren().removeAll(this);
             addBrick();
 

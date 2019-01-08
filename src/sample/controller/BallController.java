@@ -103,7 +103,7 @@ public class BallController extends AbstractController
 
         boolean flag = false;
         // Check boundaries
-        if (Discalculation.disVC(ball, getPane().getConBrickController().getShape()) <= ball.getRadius() + 1)
+        if (Discalculation.disVC(ball, getPane().getConBrickController().getShape()) <= ball.getRadius() + 0.5)
         {
             if((ball.getCenterY() < conBrick.getY() || ball.getCenterY() >conBrick.getY() + conBrick.getHeight())){
                 dy *= -1;

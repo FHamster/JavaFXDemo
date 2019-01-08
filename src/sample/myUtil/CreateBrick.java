@@ -112,7 +112,7 @@ public class CreateBrick {
             disController = 3;
         }
 
-        DeleteBrick.myDelete(saveBrick,flag);
+        DeleteBrick.myDelete(saveBrick,flag,pane);
         if(flag >= 0)
             pane.deleteBrickShape(flag);
         return  disController;
