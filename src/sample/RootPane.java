@@ -96,6 +96,7 @@ public class RootPane extends BorderPane
 
             gamePane = new GamePane(this);
             gamePane.setGameOverView(gameOverView);
+            gameOverView.setGamePane(gamePane);
             setCenter(gamePane);
             gamePane.requestFocus();
 
@@ -116,9 +117,10 @@ public class RootPane extends BorderPane
      */
     public void IniInfoPane()
     {
+        InstructionView instructionView = new InstructionView();
         infoPane.getChildren().add(timerController.getView());
         infoPane.getChildren().add(pointController.getView());
-//        timerController.startTimer();
+        infoPane.getChildren().add(instructionView);
     }
 
     /**

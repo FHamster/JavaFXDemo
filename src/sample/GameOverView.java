@@ -32,6 +32,10 @@ public class GameOverView {
         gamePane.getChildren().add(label);
     }
 
+    public void setGamePane(GamePane gamePane) {
+        this.gamePane = gamePane;
+    }
+
     public int getPoint() {
         return Point;
     }

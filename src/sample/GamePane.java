@@ -32,6 +32,7 @@ public class GamePane extends Pane
 
     private boolean reopen;
     private boolean firstBall = true;
+    private boolean dead = true;
 
     MediaPlayer deathPlayer = new MediaPlayer(MediaLoader.death);
     MediaPlayer hithPlayer;
@@ -185,9 +186,10 @@ public class GamePane extends Pane
 //            ballController.stopAnimation();
             deathPlayer.play();
             getChildren().remove(ballControllers[num]);
-            if(calculatinBall() <= 0){
+            if(calculatinBall() == 0 && dead){
                 rootPane.stopAll();
                 gameOverView.labelPane();
+                dead = false;
             }
         } catch (Exception e)
         {
@@ -292,7 +294,7 @@ public class GamePane extends Pane
                 ballDelete();
             this.firstBall = true;
            // addBall();
-
+            this.dead = true;
             this.reopen = false;
         }
     }
