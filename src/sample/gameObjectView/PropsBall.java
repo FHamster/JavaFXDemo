@@ -1,4 +1,4 @@
-package sample.propsView;
+package sample.gameObjectView;
 
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;

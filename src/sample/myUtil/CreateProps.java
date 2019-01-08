@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 import sample.GameOverView;
 import sample.GamePane;
 import sample.controller.PropsController;
-import sample.propsView.PropsBall;
+import sample.gameObjectView.PropsBall;
 
 
 public class CreateProps {

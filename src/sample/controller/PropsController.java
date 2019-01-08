@@ -4,23 +4,15 @@ import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.binding.DoubleBinding;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 import sample.GameOverView;
 import sample.GamePane;
-import sample.RootPane;
 import sample.gameObjectView.Brick;
 import sample.myUtil.Discalculation;
 import sample.myUtil.ImageLoader;
-import sample.propsView.PropsBall;
-import sample.propsView.PropsBall;
-
-import java.lang.reflect.GenericArrayType;
+import sample.gameObjectView.PropsBall;
 
 public class PropsController extends BallController
 {

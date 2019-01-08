@@ -1,21 +1,18 @@
 package sample;
 
 
-import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import sample.controller.*;
 import sample.gameObjectView.Ball;
 import sample.gameObjectView.Brick;
-import sample.infoPane.controller.TimerController;
 import sample.myUtil.CreateBrick;
-import sample.myUtil.CreateProps;
 import sample.myUtil.DeleteBrick;
-
-import javax.lang.model.element.NestingKind;
+import sample.myUtil.ImageLoader;
+import sample.myUtil.MediaLoader;
 
 /**
  * 主要游戏视图控制
@@ -36,6 +33,8 @@ public class GamePane extends Pane
     private boolean reopen;
     private boolean firstBall = true;
 
+    MediaPlayer deathPlayer = new MediaPlayer(MediaLoader.death);
+    MediaPlayer hithPlayer;
     public GamePane(RootPane rootPane)
     {
         this.reopen = false;
@@ -45,8 +44,11 @@ public class GamePane extends Pane
         setMaxSize(600, 800);
 
         //背景设置
-        Image image = new Image(getClass().getResourceAsStream("../img/background.png"));
-        setBackground(new Background(new BackgroundImage(image, null, null, null, null)));
+//        Image image = new Image(getClass().getResourceAsStream("../img/background.png"));
+//        Image image =
+//        Image image = null;
+
+        setBackground(new Background(new BackgroundImage(ImageLoader.backGround, null, null, null, null)));
 
         this.rootPane = rootPane;
 
@@ -181,6 +183,7 @@ public class GamePane extends Pane
             ballController.setDx(0);
             ballController.setDy(10);
 //            ballController.stopAnimation();
+            deathPlayer.play();
             getChildren().remove(ballControllers[num]);
             if(calculatinBall() <= 0){
                 rootPane.stopAll();
@@ -238,6 +241,11 @@ public class GamePane extends Pane
     public void deleteBrickShape(int flag)
     {
         getChildren().remove(saveBrick[flag / 10][flag % 10]);
+
+        hithPlayer = new MediaPlayer(MediaLoader.hit);
+        hithPlayer.play();
+        hithPlayer = null;
+
         //测试积分器
         rootPane.pointController.addPoint(10);
         /*=-=====*/

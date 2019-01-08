@@ -1,19 +1,11 @@
 package sample;
 
-import javafx.animation.Animation;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
+import javafx.scene.media.MediaPlayer;
 import sample.infoPane.controller.PointController;
 import sample.infoPane.controller.TimerController;
-
-import javax.swing.*;
-import javax.xml.soap.Text;
-import java.awt.peer.LabelPeer;
+import sample.myUtil.MediaLoader;
 
 /**
  * 所用视图控制
@@ -34,6 +26,8 @@ public class RootPane extends BorderPane
     Button pauseButton = new Button("暂停");
     Button restarButton = new Button("重玩");
 
+    MediaPlayer bgmPlayer;
+
     public RootPane()
     {
         //pane初始化
@@ -47,6 +41,10 @@ public class RootPane extends BorderPane
         setRight(infoPane);
         setLeft(buttonPane);
 
+
+        bgmPlayer = new MediaPlayer(MediaLoader.bgm);
+        bgmPlayer.setCycleCount(-1);
+        bgmPlayer.play();
     }
 
     public void IniGamePane()
