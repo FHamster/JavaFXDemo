@@ -11,6 +11,7 @@ import javax.swing.*;
 public class CreateBrick {
     /**
      * 创建二维数组砖块
+     * 为增加可玩性，概率生成
      */
 
     public  static BrickController[][] createBrick(GamePane pane){
@@ -76,7 +77,10 @@ public class CreateBrick {
 
         int i = 0;
         for(int j = 0; j < 6; j ++){
-            save[i][j] = new BrickController(setBrick(i, j), pane, 1);
+            if(Math.random() > 0.3)
+                save[i][j] = new BrickController(setBrick(i, j), pane, 1);
+            else
+                save[i][j] = null;
         }
 
         return save;
@@ -114,7 +118,9 @@ public class CreateBrick {
         return  disController;
     }
 
-    //判断砖块是否出界，结束游戏
+    /**
+     *     判断砖块是否出界，结束游戏
+     */
     public static boolean boundBrick(BrickController[][] save){
 
         boolean flag = false;

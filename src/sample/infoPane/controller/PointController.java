@@ -11,6 +11,7 @@ import sample.infoPane.view.PointView;
  * 可对积分进行加减
  * 使用的时候只需要制造控制器对象
  * 指定视图对象的位置
+ * 指定结束语句
  */
 
 public class PointController
@@ -34,10 +35,15 @@ public class PointController
         view.repaint();
     }
 
+    /**
+     * 分数增加
+     * @param add
+     */
     public void addPoint(int add)
     {
         bean.setPoint(bean.getPoint() + add);
         view.repaint();
+        //为结束页面添加分数
         gameOverView.setPoint(bean.getPoint());
     }
 
@@ -46,6 +52,10 @@ public class PointController
         return view;
     }
 
+    /**
+     * 用于重置分数以及修改
+     * @param point
+     */
     public void setPoint(int point) {
         bean.setPoint(point);
         view.repaint();

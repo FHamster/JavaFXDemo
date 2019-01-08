@@ -114,6 +114,7 @@ public class BallController extends AbstractController
             }
         }
 
+        //对角边界判断反弹
         if(ball.getCenterX() > conBrick.getX() && ball.getCenterX() < conBrick.getX() + conBrick.getWidth() &&
                 (ball.getCenterY() > conBrick.getY() && ball.getCenterY() < conBrick.getY() + conBrick.getHeight())){
             ball.setCenterY(ball.getCenterY() - 2 * ball.getRadius());
@@ -194,7 +195,10 @@ public class BallController extends AbstractController
         }
     }
 
-
+    /**
+     * 第一个球键盘空格发射
+     * @param e
+     */
     public void KeyCilck(KeyEvent e) {
         if(e.getCode() == KeyCode.SPACE && firstBall){
             dx = Math.random() * 0.5;

@@ -72,6 +72,9 @@ public class ConBrickController extends AbstractController {
         }
     }
 
+    /**
+     * 用于重启游戏的消失动画
+     */
     public void conBrickFade()
     {
         FadeTransition fade = new FadeTransition(Duration.millis(1000), brick);

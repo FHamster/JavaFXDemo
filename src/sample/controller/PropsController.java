@@ -69,6 +69,10 @@ public class PropsController extends BallController
         this.dy = Math.random() * 0.9 + 0.1;
     }
 
+    /**
+     * 选择道具视图
+     * @param num
+     */
     public void numChoose(int num){
         switch (num){
             case 1 : this.view = new ImageView(ImageLoader.shadow);
@@ -122,6 +126,7 @@ public class PropsController extends BallController
             }
             case 4:
             {
+                getPane().getRootPane().stopAll();
                 gameOverView.labelPane();
             }
             default:
@@ -129,6 +134,10 @@ public class PropsController extends BallController
         }
     }
 
+    /**
+     * 道具挡板接触判定
+     * @return
+     */
     private boolean isconBrick()
     {
         Brick conBrick = getPane().getConBrickController().getShape();

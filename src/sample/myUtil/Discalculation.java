@@ -7,7 +7,12 @@ import java.awt.*;
 
 public class Discalculation {
 
-
+    /**
+     * 矩形与球的向量判定
+     * @param ball 球
+     * @param brick 矩形
+     * @return
+     */
     public static double disVC(Ball ball, Brick brick){
 
         double v = 0;

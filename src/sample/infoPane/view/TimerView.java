@@ -8,6 +8,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+/**
+ * 提供时间视图
+ * 提供时间重绘
+ */
 public class TimerView extends Text
 {
     private IntegerProperty min = new SimpleIntegerProperty(0);

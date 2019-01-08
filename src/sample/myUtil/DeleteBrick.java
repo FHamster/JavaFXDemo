@@ -35,9 +35,13 @@ public class DeleteBrick
         }
     }
 
+    /**
+     * 重置游戏删除全部砖块
+     * @param save
+     */
     public static void myAllDelete(BrickController[][] save){
 
-        for(int i = 0; i < 18; i++){
+        for(int i = 0; i <= 18; i++){
             for(int j = 0; j < 6; j ++){
                 if(save[i][j] == null)
                     continue;

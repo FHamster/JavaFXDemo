@@ -36,7 +36,10 @@ public class TimerController
         animation.setCycleCount(Animation.INDEFINITE);
     }
 
-
+    /**
+     * 时间增加控制
+     * @param addSec
+     */
     public void addSec(int addSec)
     {
 //        System.out.println(1);
@@ -48,6 +51,9 @@ public class TimerController
         }
     }
 
+    /**
+     * 道具增加控制
+     */
     private void Timing()
     {
         addSec(1);
@@ -55,8 +61,10 @@ public class TimerController
 
         if (bean.getSec() % 10 == 0)
         {
+            //添加砖块
             pane.addShape();
 
+            //添加道具
             test = CreateProps.cratePropController(pane, gameOverView);
             test.start();
             pane.getChildren().add(test.getView());
@@ -65,7 +73,9 @@ public class TimerController
 
     }
 
-
+    /**
+     * 时间重置
+     */
     public void resetTimer()
     {
         animation.stop();

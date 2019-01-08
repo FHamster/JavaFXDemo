@@ -17,7 +17,11 @@ import sample.myUtil.DeleteBrick;
 
 import javax.lang.model.element.NestingKind;
 
-
+/**
+ * 主要游戏视图控制
+ * 包含 挡板，方块，球， 道具
+ * 提供函数调用中介
+ */
 public class GamePane extends Pane
 {
     ConBrickController conBrickController;
@@ -83,6 +87,7 @@ public class GamePane extends Pane
         getChildren().add(conBrickController.getShape());
 
     }
+
     //图形添加
     public void addShape()
     {
@@ -100,49 +105,17 @@ public class GamePane extends Pane
     }
 
     /**
-     * 删除球 num代表数组编号
-     * @param ballController
+     * 增加道具球
      */
-    public void deleteBall(BallController ballController)
-    {
-        try
-        {
-            int num = ballController.getNum();
-            ballNum[num] = false;
-            ballController.ballFade();
-            ballController.setDx(0);
-            ballController.setDy(10);
-//            ballController.stopAnimation();
-            getChildren().remove(ballControllers[num]);
-            if(calculatinBall() <= 0){
-                rootPane.stopAll();
-                gameOverView.labelPane();
-            }
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+    public  void propsAddBall(){
+        for(int i = 0; i <  2; i++)
+            addBall();
     }
 
-    public void deleteConBrick(){
-        conBrickController.conBrickFade();
-        getChildren().remove(conBrickController);
-        conBrickController = null;
-    }
-
-    public int calculatinBall()
-    {
-        int num = 0;
-        for (int i = 0; i < 3; i++)
-        {
-            if (ballNum[i])
-            {
-                num++;
-            }
-        }
-        return num;
-    }
-
+    /**
+     * 添加球以及firstBall 判定
+     * @return
+     */
     public boolean addBall()
     {
 
@@ -186,6 +159,56 @@ public class GamePane extends Pane
 
         return flag;
     }
+    /**
+     * 删除球 num代表数组编号
+     * @param ballController
+     */
+    public void deleteBall(BallController ballController)
+    {
+        try
+        {
+            int num = ballController.getNum();
+            ballNum[num] = false;
+            ballController.ballFade();
+            ballController.setDx(0);
+            ballController.setDy(10);
+//            ballController.stopAnimation();
+            getChildren().remove(ballControllers[num]);
+            if(calculatinBall() <= 0){
+                rootPane.stopAll();
+                gameOverView.labelPane();
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 删除挡板
+     */
+    public void deleteConBrick(){
+        conBrickController.conBrickFade();
+        getChildren().remove(conBrickController);
+        conBrickController = null;
+    }
+
+    /**
+     * 剩余球数量计算
+     * @return
+     */
+    public int calculatinBall()
+    {
+        int num = 0;
+        for (int i = 0; i < 3; i++)
+        {
+            if (ballNum[i])
+            {
+                num++;
+            }
+        }
+        return num;
+    }
 
     /**
      * 调用砖块碰撞判断
@@ -212,6 +235,9 @@ public class GamePane extends Pane
         /*=-=====*/
     }
 
+    /**
+     * 删除数组内的全部球
+     */
     public void ballDelete()
     {
         for (int i = 0; i < 3; i++)
@@ -226,13 +252,6 @@ public class GamePane extends Pane
         }
     }
 
-    /**
-     * 增加道具球
-     */
-    public  void propsAddBall(){
-        for(int i = 0; i <  2; i++)
-           addBall();
-    }
     /**
      * delete道具球动画
      * @param propsController

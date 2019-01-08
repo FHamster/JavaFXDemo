@@ -21,6 +21,12 @@ public class CreateProps {
         return new PropsBall(30 + Math.random() * 540, 0, 15, Color.RED, num);
     }
 
+    /**
+     * 添加道具控制类
+     * @param pane 游戏总视图
+     * @param gameOverView 💣调用视图
+     * @return
+     */
     public static PropsController cratePropController(GamePane pane , GameOverView gameOverView){
         return new PropsController(createPropsBall(pane), pane, gameOverView);
     }

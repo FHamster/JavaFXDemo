@@ -15,6 +15,9 @@ import javax.swing.*;
 import javax.xml.soap.Text;
 import java.awt.peer.LabelPeer;
 
+/**
+ * 所用视图控制
+ */
 public class RootPane extends BorderPane
 {
     GamePane gamePane = new GamePane(this);
@@ -54,6 +57,7 @@ public class RootPane extends BorderPane
     public void IniButtonPane()
     {
         //TODO 按键事件指定
+        //开始
         startButton.setOnAction(e ->
         {
             timerController.startTimer();
@@ -66,6 +70,7 @@ public class RootPane extends BorderPane
             }
         });
 
+        //暂停
         pauseButton.setOnAction(e ->
         {
             timerController.getAnimation().stop();
@@ -78,7 +83,7 @@ public class RootPane extends BorderPane
             }
         });
 
-
+        //重新开始
         restarButton.setOnAction(e ->
         {
             timerController.getAnimation().stop();
@@ -108,6 +113,9 @@ public class RootPane extends BorderPane
 
     }
 
+    /**
+     * 时间分数初始化
+     */
     public void IniInfoPane()
     {
         infoPane.getChildren().add(timerController.getView());
@@ -115,6 +123,9 @@ public class RootPane extends BorderPane
 //        timerController.startTimer();
     }
 
+    /**
+     * 调用结束前终止所有动画
+     */
     public void stopAll(){
         timerController.getAnimation().stop();
         gamePane.conBrickController.setMove(false);
