@@ -1,9 +1,12 @@
 package sample.myUtil;
 
+import sample.RootPane;
 import sample.controller.BrickController;
 import sample.gameObjectView.Ball;
 import sample.gameObjectView.Brick;
 import sample.GamePane;
+
+import javax.swing.*;
 
 public class CreateBrick {
     /**
@@ -15,9 +18,12 @@ public class CreateBrick {
 
         //给二维数组加入控制器
         //按照二维数组ij编号创造单个砖块视图对象
-        for(int i = 0; i < 6; i++){
+        for(int i = 0; i < 10; i++){
             for(int j = 0; j < 6; j ++){
-                save[i][j] = new BrickController(setBrick(i, j), pane, 1);
+                if(Math.random() > 0.3)
+                    save[i][j] = new BrickController(setBrick(i, j), pane, 1);
+                else
+                    save[i][j] = null;
             }
         }
         return save;
@@ -109,7 +115,7 @@ public class CreateBrick {
     }
 
     //判断砖块是否出界，结束游戏
-    public boolean boundBrick(BrickController[][] save){
+    public static boolean boundBrick(BrickController[][] save){
 
         boolean flag = false;
 

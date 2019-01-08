@@ -4,6 +4,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+import sample.GameOverView;
 import sample.GamePane;
 import sample.controller.PropsController;
 import sample.infoPane.bean.TimerBean;
@@ -22,10 +23,13 @@ public class TimerController
     private TimerBean bean;
     private TimerView view;
     private Animation animation;
+    private GameOverView gameOverView;
+    private PropsController test;
 
-    public TimerController(GamePane pane)
+    public TimerController(GamePane pane, GameOverView gameOverView)
     {
         this.pane = pane;
+        this.gameOverView = gameOverView;
         bean = new TimerBean();
         view = new TimerView(bean.minProperty(), bean.secProperty());
         animation = new Timeline(new KeyFrame(Duration.seconds(1), e -> Timing()));
@@ -53,7 +57,7 @@ public class TimerController
         {
             pane.addShape();
 
-            PropsController test = CreateProps.cratePropController(pane);
+            test = CreateProps.cratePropController(pane, gameOverView);
             test.start();
             pane.getChildren().add(test.getView());
         }
@@ -83,6 +87,10 @@ public class TimerController
     public int currentSec()
     {
         return bean.getMin() * 60 + bean.getSec();
+    }
+
+    public PropsController getTest() {
+        return test;
     }
 
     public TimerView getView()

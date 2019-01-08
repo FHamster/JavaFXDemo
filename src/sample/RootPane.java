@@ -20,17 +20,16 @@ public class RootPane extends BorderPane
     GamePane gamePane = new GamePane(this);
     InfoPane infoPane = new InfoPane();
     ButtonPane buttonPane = new ButtonPane();
+    GameOverView gameOverView = new GameOverView(gamePane);
 
     //控制器
-    TimerController timerController = new TimerController(gamePane);
-    PointController pointController = new PointController(gamePane);
+    TimerController timerController = new TimerController(gamePane,gameOverView);
+    PointController pointController = new PointController(gamePane, gameOverView);
 
     //按键
     Button startButton = new Button("开始");
     Button pauseButton = new Button("暂停");
     Button restarButton = new Button("重玩");
-
-    Label label = new Label();
 
     public RootPane()
     {
@@ -49,6 +48,7 @@ public class RootPane extends BorderPane
 
     public void IniGamePane()
     {
+        gamePane.setGameOverView(gameOverView);
     }
 
     public void IniButtonPane()
@@ -58,6 +58,8 @@ public class RootPane extends BorderPane
         {
             timerController.startTimer();
             gamePane.conBrickController.setMove(true);
+            if(timerController.getTest() != null)
+                timerController.getTest().start();
             for(int i = 0 ; i < 3; i++){
                 if(gamePane.ballNum[i])
                     gamePane.ballControllers[i].start();
@@ -68,6 +70,8 @@ public class RootPane extends BorderPane
         {
             timerController.getAnimation().stop();
             gamePane.conBrickController.setMove(false);
+            if(timerController.getTest() != null)
+                timerController.getTest().getAnimation().stop();
             for(int i = 0 ; i < 3; i++){
                 if(gamePane.ballNum[i])
                     gamePane.ballControllers[i].getAnimation().stop();
@@ -88,6 +92,7 @@ public class RootPane extends BorderPane
             gamePane = null;
 
             gamePane = new GamePane(this);
+            gamePane.setGameOverView(gameOverView);
             setCenter(gamePane);
             gamePane.requestFocus();
 
@@ -110,19 +115,22 @@ public class RootPane extends BorderPane
 //        timerController.startTimer();
     }
 
-    public  void labelPane(){
-        label.setLayoutX(200);
-        label.setLayoutY(250);
-        label.setText("GAME OVER  \n SCORE : " + pointController.getPoint());
-        label.setFont(Font.font ("Verdana", FontWeight.BOLD,50));
-        label.setTextFill(Color.DARKSEAGREEN);
-        gamePane.getChildren().add(label);
+    public void stopAll(){
+        timerController.getAnimation().stop();
+        gamePane.conBrickController.setMove(false);
+        if(timerController.getTest() != null)
+            timerController.getTest().getAnimation().stop();
+        for(int i = 0 ; i < 3; i++){
+            if(gamePane.ballNum[i])
+                gamePane.ballControllers[i].getAnimation().stop();
+        }
     }
 
     public void startTimer()
     {
         timerController.startTimer();
     }
+
     public void setGamePane(GamePane gamePane) {
         this.gamePane = gamePane;
     }

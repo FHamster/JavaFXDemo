@@ -1,6 +1,7 @@
 package sample.infoPane.controller;
 
 import javafx.animation.Animation;
+import sample.GameOverView;
 import sample.GamePane;
 import sample.infoPane.bean.PointBean;
 import sample.infoPane.view.PointView;
@@ -17,11 +18,12 @@ public class PointController
     private GamePane pane;
     private PointBean bean;
     private PointView view;
-//    private Animation animation;
+    private GameOverView gameOverView;
 
-    public PointController(GamePane pane)
+    public PointController(GamePane pane,GameOverView gameOverView)
     {
         this.pane = pane;
+        this.gameOverView = gameOverView;
         bean = new PointBean();
         view = new PointView(bean.pointProperty());
     }
@@ -36,6 +38,7 @@ public class PointController
     {
         bean.setPoint(bean.getPoint() + add);
         view.repaint();
+        gameOverView.setPoint(bean.getPoint());
     }
 
     public PointView getView()

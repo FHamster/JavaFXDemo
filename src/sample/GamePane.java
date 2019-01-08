@@ -27,6 +27,8 @@ public class GamePane extends Pane
     RootPane rootPane;
     BallController[] ballControllers = new BallController[5];
 
+    private GameOverView gameOverView;
+
     private boolean reopen;
     private boolean firstBall = true;
 
@@ -63,10 +65,11 @@ public class GamePane extends Pane
     //初始化砖块
     public void addBrick(){
         saveBrick = CreateBrick.createBrick(this);
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 18; i++)
         {
             for (int j = 0; j < 6; j++)
             {
+                if(saveBrick[i][j] != null)
                 getChildren().add(saveBrick[i][j].getShape());
             }
         }
@@ -89,6 +92,11 @@ public class GamePane extends Pane
         {
             getChildren().add(saveBrick[i][j].getShape());
         }
+
+        if(CreateBrick.boundBrick(saveBrick)){
+            rootPane.stopAll();
+            gameOverView.labelPane();
+        }
     }
 
     /**
@@ -107,8 +115,8 @@ public class GamePane extends Pane
 //            ballController.stopAnimation();
             getChildren().remove(ballControllers[num]);
             if(calculatinBall() <= 0){
-                addBall();
-                addShape();
+                rootPane.stopAll();
+                gameOverView.labelPane();
             }
         } catch (Exception e)
         {
@@ -254,6 +262,9 @@ public class GamePane extends Pane
         }
     }
 
+    public void setGameOverView(GameOverView gameOverView) {
+        this.gameOverView = gameOverView;
+    }
 
     public ConBrickController getConBrickController()
     {

@@ -1,6 +1,7 @@
 package sample.myUtil;
 
 import javafx.scene.paint.Color;
+import sample.GameOverView;
 import sample.GamePane;
 import sample.controller.PropsController;
 import sample.propsView.PropsBall;
@@ -20,8 +21,8 @@ public class CreateProps {
         return new PropsBall(30 + Math.random() * 540, 0, 15, Color.RED, num);
     }
 
-    public static PropsController cratePropController(GamePane pane){
-        return new PropsController(createPropsBall(pane), pane);
+    public static PropsController cratePropController(GamePane pane , GameOverView gameOverView){
+        return new PropsController(createPropsBall(pane), pane, gameOverView);
     }
 
 }

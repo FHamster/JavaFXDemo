@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
+import sample.GameOverView;
 import sample.GamePane;
 import sample.RootPane;
 import sample.gameObjectView.Brick;
@@ -18,6 +19,8 @@ import sample.myUtil.Discalculation;
 import sample.myUtil.ImageLoader;
 import sample.propsView.PropsBall;
 import sample.propsView.PropsBall;
+
+import java.lang.reflect.GenericArrayType;
 
 public class PropsController extends BallController
 {
@@ -31,12 +34,16 @@ public class PropsController extends BallController
     private double dx;
     private double dy;
 
-    public PropsController(PropsBall ball, GamePane pane)
+    private GameOverView gameOverView;
+
+    public PropsController(PropsBall ball, GamePane pane, GameOverView gameOverView)
     {
         super(pane);
         super.setAnimation(new Timeline(new KeyFrame(Duration.millis(1), e -> move())));
 
         this.ball = ball;
+
+        this.gameOverView = gameOverView;
 
         this.propsNum = ball.getPropsNum();
         numChoose(this.propsNum);
@@ -115,7 +122,7 @@ public class PropsController extends BallController
             }
             case 4:
             {
-
+                gameOverView.labelPane();
             }
             default:
                 break;
