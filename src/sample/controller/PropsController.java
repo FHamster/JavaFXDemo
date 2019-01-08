@@ -14,6 +14,9 @@ import sample.myUtil.Discalculation;
 import sample.myUtil.ImageLoader;
 import sample.gameObjectView.PropsBall;
 
+/**
+ * 道具控制器
+ */
 public class PropsController extends BallController
 {
 

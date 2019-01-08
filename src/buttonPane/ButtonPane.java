@@ -1,4 +1,4 @@
-package sample;
+package buttonPane;
 
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;

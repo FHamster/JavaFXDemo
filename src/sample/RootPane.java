@@ -1,5 +1,6 @@
 package sample;
 
+import buttonPane.ButtonPane;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.MediaPlayer;
@@ -26,6 +27,7 @@ public class RootPane extends BorderPane
     Button pauseButton = new Button("暂停");
     Button restarButton = new Button("重玩");
 
+    //媒体播放器
     MediaPlayer bgmPlayer;
 
     public RootPane()
@@ -42,6 +44,7 @@ public class RootPane extends BorderPane
         setLeft(buttonPane);
 
 
+        //player设置
         bgmPlayer = new MediaPlayer(MediaLoader.bgm);
         bgmPlayer.setCycleCount(-1);
         bgmPlayer.play();
